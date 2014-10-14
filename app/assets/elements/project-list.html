@@ -1,0 +1,66 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/core-selector/core-selector.html">
+<link rel="import" href="../bower_components/paper-ripple/paper-ripple.html">
+
+<polymer-element name="project-list" noscript>
+  <template>
+    <style>
+      :host {
+        padding: 1.5% 0;
+        margin: 0;
+      }
+      /*Individual project*/
+      li {
+        list-style: none;
+        float: left;
+        width: 100%;
+        position: relative;
+      }
+      /*Project thumbnails*/
+      div {
+        margin: 4px 8px;
+        padding: 15% 0;
+        min-height: 100px;
+        background-size: cover;
+        background-position: center;
+        position: relative;
+      }
+      br {
+        clear: both;
+      }
+      /*Label for each project*/
+      label {
+        font-weight: 100;
+        font-size: 32px;
+        position: absolute;
+        bottom: 0;
+        text-align: center;
+        left: 0;
+        right: 0;
+        height: 40px;
+        padding-bottom: 6px;
+        color: white;
+        cursor: inherit;
+        background-color: rgba(0, 0, 0, 0.5);
+        /*  background-image: radial-gradient(ellipse 70% 100% at 50% 0%, rgba(0, 0, 0, 0.78), rgba(34, 33, 33, 0));*/
+        /*  background-image: radial-gradient(at 50% 0%, rgba(0, 0, 0, 0.78), rgba(34, 33, 33, 0.5));*/
+      }
+      paper-ripple {
+        color: #bbbbbb;
+      }
+    </style>
+    <core-selector>
+      <template repeat="{{project in data}}">
+        <a href="#{{project.id}}">
+          <li>
+            <div cross-fade hero-id="{{project.id}}" hero style="background-image:url('content/{{project.id}}/{{project.images[0]}}');">
+              <label>{{project.name}}</label>
+              <paper-ripple class="recenteringTouch" fit></paper-ripple>
+            </div>
+          </li>
+        </a>
+      </template>
+    </core-selector>
+    <br>
+  </template>
+</polymer-element>

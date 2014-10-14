@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" style="height: 100%;">
+
+<head>
+  <meta charset="utf-8" />
+  <title>William Wu</title>
+  <meta name="description" content="A curious student exploring the realm where imagination, visual design, and web technologies collide.">
+  <meta name="author" content="William Wu">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0" />
+  <script src="bower_components/platform/platform.js"></script>
+  <!--  <link rel="import" href="bower_components/font-roboto/roboto.html">-->
+  <link rel="import" href="bower_components/paper-button/paper-button.html">
+  <link rel="import" href="elements/project-list.html">
+  <link rel="import" href="elements/detail-view.html">
+  <link rel="import" href="bower_components/core-animated-pages/core-animated-pages.html">
+  <link rel="stylesheet" href="app.css" />
+</head>
+
+<body unresolved>
+  <section id="splash" style="height: 100%;">
+    <div style="height: 50%;"></div>
+    <img src="Logo.png" />
+    <h1>William Wu</h1>
+    <q>Our capabilities are only limited by the limits we impose on ourselves.</q>
+  </section>
+  <core-animated-pages id="pages" selected="1" transitions="hero-transition cross-fade cross-fade-delayed">
+    <detail-view id="detail"></detail-view>
+    <project-list id="projects"></project-list>
+  </core-animated-pages>
+  <script src="bower_components/jquery/dist/jquery.js"></script>
+  <script src="app.js"></script>
+  <script>
+    require('main');
+  </script>
+</body>
+
+</html>

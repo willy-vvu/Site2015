@@ -1,0 +1,22 @@
+#splash {
+  position: relative;
+  /*  margin-bottom: 200px;*/
+  text-align: center;
+}
+#splash img {
+  margin-top: -100px;
+  width: 192px;
+  height: 192px;
+}
+#splash h1 {
+  margin-top: -24px;
+  margin-bottom: 8px;
+  font-weight: 100;
+  font-size: 32pt;
+}
+#splash q {
+  display: block;
+  width: 192px;
+  text-align: left;
+  margin: 0 auto;
+}
