@@ -23,5 +23,5 @@ module.exports = [
   "It's hard to imagine how you'll be viewed a century or a millenia from now."
   "Unique individuals are homogenous, but homogenous individuals are not unique."
   "Let passion guide you and creativity get you there."
-  "A passionate heart and a creative mind are a potent combination.."
+  "A passionate heart and a creative mind are a potent combination."
 ]

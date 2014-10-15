@@ -61,7 +61,7 @@ module.exports = [
     ]
   }
   {
-    id: "enviroinvasivespecies"
+    id: "enviroinvasive"
     name: "Invasive Species"
     date: "February 2014"
     images: [

@@ -30,3 +30,6 @@ public/
 
 # Bower stuff.
 bower_components/
+
+# That pesky c9 stuff.
+.c9

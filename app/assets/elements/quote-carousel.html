@@ -3,10 +3,14 @@
 
 <polymer-element name="quote-carousel">
   <template>
-    <core-animated-pages id="quotes" selected="1" transitions="hero-transition cross-fade">
+    <style>
+      q {
+        quotes:none;
+      }
+    </style>
+    <core-animated-pages id="quotes" selected="0" transitions="hero-transition cross-fade cross-fade-delayed">
       <template repeat="{{quote in data}}">
-        <div><q cross-fade>{{quote}}</q>
-          <div hero hero-id="williamwu">- William Wu</div>
+        <div class="quoteholder"><span hero hero-id="ldquo">&ldquo;</span><q cross-fade>{{quote}}</q><span hero hero-id="rdquo">&rdquo;</span>
         </div>
       </template>
     </core-animated-pages>
@@ -16,10 +20,10 @@
       ready: function () {
         var that = this;
         var changeQuote = function () {
-          if (that.$.quotes.selected >= that.data.length) {
-            that.$.quotes.selected = 1;
-          } else {
+          if (that.$.quotes.selected < that.data.length - 1) {
             that.$.quotes.selected++
+          } else {
+            that.$.quotes.selected = 0;
           }
           setTimeout(changeQuote, 5000);
         }

@@ -17,8 +17,7 @@
   font-weight: 100;
   font-size: 40px;
 }
-#splash /deep/ q {
-  display: block;
+#splash /deep/ .quoteholder {
   width: 192px;
   text-align: left;
   margin: 0 auto;
@@ -44,7 +43,7 @@
   #splash h1 {
     font-size: 40px;
   }
-  #splash /deep/ q {
+  #splash /deep/ .quoteholder {
     text-align: center;
     width: 400px;
   }
@@ -62,7 +61,7 @@
     margin-top: -40px;
     font-size: 48px;
   }
-  #splash /deep/ q {
+  #splash /deep/ .quoteholder {
     width: 600px;
   }
 }

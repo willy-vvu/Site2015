@@ -27,14 +27,14 @@ loadProject = (id, initially) ->
     pages.selected = 0
     #clearTimeout(scrollProjectPicturesTimeout)
     #scrollProjectPicturesTimeout = setTimeout(scrollProjectPictures, 1000)
-    mainScroll = $("body").scrollTop()
+    mainScroll = Math.max($("body").scrollTop(), $("html").scrollTop())
     scrollTo($(pages).offset().top, if initially then 100 else 300)
   else
     pages.setAttribute("selected", 1)
     pages.selected = 1
     #clearTimeout(scrollProjectPicturesTimeout)
     if(!initially)
-      scrollTo((if mainScroll is 0 then ($(pages).offset().top - 200) else mainScroll), 300)
+      scrollTo((if mainScroll is 0 then ($(pages).offset().top - 100) else mainScroll), 300)
     mainScroll = 0
 
 reloadProject = (event) ->
