@@ -1,0 +1,43 @@
+:host {
+  padding: 1.5% 0;
+  margin: 0;
+}
+/*Individual project*/
+
+li {
+  list-style: none;
+  float: left;
+  width: 100%;
+  position: relative;
+}
+/*Project thumbnails*/
+
+div {
+  margin: 4px 8px;
+  height: 192px;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+br {
+  clear: both;
+}
+/*Label for each project*/
+
+label {
+  font-weight: 100;
+  font-size: 24pt;
+  position: absolute;
+  top: 0;
+  text-align: center;
+  left: 0;
+  right: 0;
+  height: 56px;
+  color: white;
+  cursor: inherit;
+  background-image: radial-gradient(ellipse 70% 100% at 50% 0%, rgba(0, 0, 0, 0.78), rgba(34, 33, 33, 0));
+  /*  background-image: radial-gradient(at 50% 0%, rgba(0, 0, 0, 0.78), rgba(34, 33, 33, 0.5));*/
+}
+paper-ripple {
+  color: #bbbbbb;
+}
