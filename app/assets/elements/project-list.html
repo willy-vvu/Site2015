@@ -17,7 +17,7 @@
         position: relative;
       }
       /*Project thumbnails*/
-      div {
+      li div {
         margin: 4px 8px;
         padding: 15% 0;
         min-height: 100px;
@@ -48,6 +48,26 @@
       paper-ripple {
         color: #bbbbbb;
       }
+      @media (min-width: 550px) {
+        :host {
+          margin-left: auto;
+          margin-right: auto;
+          max-width: 800px;
+        }
+        li {
+          width: 50%;
+        }
+      }
+      @media (min-width: 1100px) {
+        :host {
+          margin-left: auto;
+          margin-right: auto;
+          max-width: 1200px;
+        }
+        li {
+          width: 33.333%;
+        }
+      }
     </style>
     <core-selector>
       <template repeat="{{project in data}}">
@@ -61,6 +81,7 @@
         </a>
       </template>
     </core-selector>
+    <p style="clear:both;margin-left:8px;padding-top:40px;font-size:24px;">More projects coming soon...</p>
     <br>
   </template>
 </polymer-element>

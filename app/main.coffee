@@ -4,6 +4,10 @@ projectHTML = ""
 projects = document.getElementById("projects")
 detail = document.getElementById("detail")
 pages = document.getElementById("pages")
+quotes = document.getElementById("quotes")
+mainScroll = 0
+
+quotes.data = require("quotes")
 
 projects.data = projectList
 projectList.forEach((item)->
@@ -23,22 +27,28 @@ loadProject = (id, initially) ->
     pages.selected = 0
     #clearTimeout(scrollProjectPicturesTimeout)
     #scrollProjectPicturesTimeout = setTimeout(scrollProjectPictures, 1000)
-    scrollToMiddle(if initially then 0 else 300)
+    mainScroll = $("body").scrollTop()
+    scrollTo($(pages).offset().top, if initially then 100 else 300)
   else
     pages.setAttribute("selected", 1)
     pages.selected = 1
     #clearTimeout(scrollProjectPicturesTimeout)
-    if(id == "projects")
-      scrollToMiddle(if initially then 1000 else 300)
+    if(!initially)
+      scrollTo((if mainScroll is 0 then ($(pages).offset().top - 200) else mainScroll), 300)
+    mainScroll = 0
 
 reloadProject = (event) ->
   loadProject(window.location.hash.replace(/[^a-z]/g, ""), !event?)
   if (event)
     event.preventDefault()
 
-scrollToMiddle = (time) ->
-  console.log(time)
-  $("html, body").animate({scrollTop:$(pages).offset().top}, time)
+scrollTo = (position, time) ->
+  #console.log(time)
+  $("html, body").animate({scrollTop:position}, time)
+
+$("#comedown core-icon-button").click(->
+  scrollTo($(pages).offset().top, 1000)
+)
 
 window.addEventListener("hashchange", reloadProject, true)
 $(document).ready(->

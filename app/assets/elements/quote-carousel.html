@@ -1,0 +1,30 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/core-animated-pages/core-animated-pages.html">
+
+<polymer-element name="quote-carousel">
+  <template>
+    <core-animated-pages id="quotes" selected="1" transitions="hero-transition cross-fade">
+      <template repeat="{{quote in data}}">
+        <div><q cross-fade>{{quote}}</q>
+          <div hero hero-id="williamwu">- William Wu</div>
+        </div>
+      </template>
+    </core-animated-pages>
+  </template>
+  <script>
+    Polymer({
+      ready: function () {
+        var that = this;
+        var changeQuote = function () {
+          if (that.$.quotes.selected >= that.data.length) {
+            that.$.quotes.selected = 1;
+          } else {
+            that.$.quotes.selected++
+          }
+          setTimeout(changeQuote, 5000);
+        }
+        setTimeout(changeQuote, 5000);
+      }
+    })
+  </script>
+</polymer-element>

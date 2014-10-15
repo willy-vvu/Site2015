@@ -1,5 +1,4 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
-<link rel="import" href="../bower_components/core-header-panel/core-header-panel.html">
 <link rel="import" href="../bower_components/core-toolbar/core-toolbar.html">
 <link rel="import" href="../bower_components/core-icons/core-icons.html">
 <link rel="import" href="../bower_components/core-icon-button/core-icon-button.html">
@@ -40,10 +39,14 @@
       }
       .images {
         white-space: nowrap;
-        overflow-y: auto;
+        overflow-y: hidden;
+        overflow-x: auto;
+        max-height: 50%;
+        width: 100%;
       }
       .images img {
-        width: 100%;
+        max-height: 100%;
+        max-width: 100%;
       }
       .images > li {
         display: inline;
@@ -64,7 +67,7 @@
       .links,
       ol,
       article {
-        padding: 0 8px 8px 8px;
+        padding: 0 16px 8px 16px;
       }
       /*
       .links > li:first-of-type > a:hover {
@@ -93,10 +96,42 @@
       core-toolbar a {
         color: inherit;
       }
+      @media (min-width: 550px) {
+        :host {
+          margin-left: auto;
+          margin-right: auto;
+          max-width: 800px;
+        }
+        .links {
+          width: 50%;
+          max-width: 300px;
+          float: right;
+        }
+      }
+      @media (min-width: 1140px) {
+        :host {
+          margin-left: auto;
+          margin-right: auto;
+          max-width: 1140px;
+        }
+        article {
+          padding-right: 340px;
+        }
+        .images {
+          max-width: 1100;
+          margin: auto;
+        }
+        .links {
+          position: absolute;
+          right: 0;
+          width: 300px;
+          float: right;
+        }
+      }
     </style>
     <core-toolbar z-depth="0">
-      <a href="{{'#projects'}}">
-        <core-icon-button icon="arrow-back" on-tap="{{back}}"></core-icon-button>
+      <a href="{{'#/'}}">
+        <core-icon-button icon="arrow-back"></core-icon-button>
       </a>
     </core-toolbar>
     <h1>{{project.name}}</h1>
@@ -120,6 +155,12 @@
     <article cross-fade>
       <template is="juicy-html" content="{{project.content}}"></template>
     </article>
+    <core-toolbar z-depth="0">
+      <a href="{{'#/'}}">
+        <core-icon-button icon="arrow-back"></core-icon-button>
+      </a>
+      <div>All projects</div>
+    </core-toolbar>
     <!--
     <ul class="tags" cross-fade>
 <template repeat="{{tag in project.tags}}">

@@ -10,9 +10,12 @@
   <script src="bower_components/platform/platform.js"></script>
   <!--  <link rel="import" href="bower_components/font-roboto/roboto.html">-->
   <link rel="import" href="bower_components/paper-button/paper-button.html">
+  <link rel="import" href="bower_components/core-icon-button/core-icon-button.html">
+  <link rel="import" href="bower_components/core-icons/core-icons.html">
+  <link rel="import" href="bower_components/core-animated-pages/core-animated-pages.html">
   <link rel="import" href="elements/project-list.html">
   <link rel="import" href="elements/detail-view.html">
-  <link rel="import" href="bower_components/core-animated-pages/core-animated-pages.html">
+  <link rel="import" href="elements/quote-carousel.html">
   <link rel="stylesheet" href="app.css" />
 </head>
 
@@ -21,7 +24,10 @@
     <div style="height: 50%;"></div>
     <img src="Logo.png" />
     <h1>William Wu</h1>
-    <q>Our capabilities are only limited by the limits we impose on ourselves.</q>
+    <quote-carousel id="quotes"></quote-carousel>
+    <div id="comedown">
+      <core-icon-button icon="expand-more"></core-icon-button>
+    </div>
   </section>
   <core-animated-pages id="pages" selected="1" transitions="hero-transition cross-fade cross-fade-delayed">
     <detail-view id="detail"></detail-view>
