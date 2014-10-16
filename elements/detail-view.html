@@ -129,13 +129,13 @@
         }
       }
     </style>
-    <core-toolbar z-depth="0">
+    <core-toolbar z-depth="0" cross-fade>
       <a href="{{'#/'}}">
         <core-icon-button icon="arrow-back"></core-icon-button>
       </a>
     </core-toolbar>
-    <h1>{{project.name}}</h1>
-    <h2>{{project.date}}</h2>
+    <h1 cross-fade>{{project.name}}</h1>
+    <h2 cross-fade>{{project.date}}</h2>
     <ul class="images" hero hero-id="{{project.id}}">
       <template repeat="{{image in project.images}}">
         <li>
