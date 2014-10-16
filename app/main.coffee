@@ -1,4 +1,4 @@
-console.time("Load")
+#console.time("Load")
 projectList = require("projects")
 projectHTML = ""
 projects = document.getElementById("projects")
@@ -13,8 +13,7 @@ projects.data = projectList
 projectList.forEach((item)->
   item.content = require("content/" + item.id + "/content")
 )
-
-console.timeEnd("Load")
+#console.timeEnd("Load")
 
 #scrollProjectPicturesTimeout = 0
 
@@ -27,8 +26,10 @@ loadProject = (id, initially) ->
     pages.selected = 0
     #clearTimeout(scrollProjectPicturesTimeout)
     #scrollProjectPicturesTimeout = setTimeout(scrollProjectPictures, 1000)
-    mainScroll = Math.max($("body").scrollTop(), $("html").scrollTop())
-    scrollTo($(pages).offset().top, if initially then 100 else 300)
+    mainScroll = getScrollTop()
+    if(!initially)
+      scrollTo($(pages).offset().top, 300)
+    document.getElementById("quickscroll").id=project.id;
   else
     pages.setAttribute("selected", 1)
     pages.selected = 1
@@ -42,6 +43,8 @@ reloadProject = (event) ->
   if (event)
     event.preventDefault()
 
+getScrollTop = -> Math.max($("body").scrollTop(), $("html").scrollTop())
+
 scrollTo = (position, time) ->
   #console.log(time)
   $("html, body").animate({scrollTop:position}, time)
@@ -51,9 +54,8 @@ $("#comedown core-icon-button").click(->
 )
 
 window.addEventListener("hashchange", reloadProject, true)
-$(document).ready(->
-  reloadProject()
-)
+reloadProject()
+
 ###
 scrollProjectPictures = () ->
   console.log(pages.selected)

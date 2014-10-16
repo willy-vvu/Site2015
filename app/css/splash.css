@@ -19,7 +19,7 @@
 }
 #splash /deep/ .quoteholder {
   width: 192px;
-  text-align: left;
+  text-align: center;
   margin: 0 auto;
 }
 #comedown {
@@ -28,7 +28,7 @@
   top: 80%;
   left: 0;
   right: 0;
-  background-image: linear-gradient(transparent 60%, rgba(0, 0, 0, 0.3));
+  background-image: linear-gradient(rgba(255, 255, 255, 0.0) 60%, rgba(255, 255, 255, 1.0));
   text-align: center;
 }
 @media (min-width: 550px) {
@@ -44,7 +44,6 @@
     font-size: 40px;
   }
   #splash /deep/ .quoteholder {
-    text-align: center;
     width: 400px;
   }
 }
