@@ -74,4 +74,4 @@ inViewOnRight = (image, container) ->
   #0 if not in view, 1 if partially in view, 2 if fully in view
   return containerLeft <= elemLeft
 ###
-require("backdrop")
+require("backdrop/core")
