@@ -3,14 +3,9 @@
 
 <polymer-element name="quote-carousel">
   <template>
-    <style>
-      q {
-        quotes:none;
-      }
-    </style>
-    <core-animated-pages id="quotes" selected="0" transitions="hero-transition cross-fade cross-fade-delayed">
+    <core-animated-pages id="quotes" selected="0" transitions="cross-fade">
       <template repeat="{{quote in data}}">
-        <div class="quoteholder"><span hero hero-id="ldquo">&ldquo;</span><q cross-fade>{{quote}}</q><span hero hero-id="rdquo">&rdquo;</span>
+        <div class="quoteholder"><q cross-fade>{{quote}}</q>
         </div>
       </template>
     </core-animated-pages>

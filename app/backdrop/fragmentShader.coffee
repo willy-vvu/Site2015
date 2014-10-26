@@ -1,6 +1,9 @@
 module.exports = "
-varying vec3 vNormal;
+varying float diffuse;
+varying float ao;
 void main(){
-  gl_FragColor = vec4(0.5 * normalize( vNormal ) + 0.5, 1.0);
+  gl_FragColor = vec4(vec3(
+    (min(1.0-ao,1.0)*0.3+0.7)*min(diffuse,1.0))
+  , 1.0);
 }
 "
