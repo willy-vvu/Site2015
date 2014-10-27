@@ -38,7 +38,7 @@ renderloop = () ->
 # Create the scene and camera
 window.scene = new THREE.Scene()
 camera = new THREE.PerspectiveCamera(45, 1, 0.1, 100)
-camera.position.z=12
+camera.position.z=10
 camera.lookAt(new THREE.Vector3(0,0,0))
 scene.add(camera)
 

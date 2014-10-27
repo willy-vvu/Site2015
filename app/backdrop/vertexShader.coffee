@@ -7,9 +7,14 @@ module.exports = "
 #define UPPER \n
 varying float diffuse;
 varying float ao;
+varying float aoMask;
 uniform float time;
+float pseudoChiSquared(float x){
+  return x/(x*x+1.0);
+}
 float getHeight(vec2 coord){
-  return (0.5*sin(-time+length(coord))+0.5)+0.05*dot(coord,coord);
+  float phase = max(mod(-0.5*time+0.07*length(coord),1.0)*4.0-3.0,0.0);
+  return 0.5*pseudoChiSquared(10.0-10.0*phase)/*+0.05*dot(coord,coord)*/;
 }
 void main(){
   float order = floor(position.z / 7.0);
@@ -66,17 +71,19 @@ void main(){
     );
   }
   if(heightDiff<0.0){
-    ao = -0.7;
+    ao = -5.0;
   }
   else{
-    ao = min(2.0*heightDiff,1.0);
+    ao = min(4.0*heightDiff,1.0);
   }
 
   if(id < 0.5){
     diffuse = 1000000.0;
+    aoMask = -9.0;
   }
   else {
-    diffuse = 0.85;
+    diffuse = 0.0;
+    aoMask = 1.0;
   }
 
   vec3 pos = position;
