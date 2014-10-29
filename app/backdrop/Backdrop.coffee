@@ -12,17 +12,23 @@ module.exports = ->
   renderer.setClearColor(0xFFFFFF,1)
   backdrop.appendChild(renderer.domElement)
 
+
+  @time = 0
+  @currentScroll = 0
+  @height = 0
+  @width = 0
+
   #The below are used for FOV calculations.
   #The makimum allowable bounds in the world the camera can see
-  maxCameraViewWidth = 8
+  maxCameraViewWidth = 7.5
   maxCameraViewHeight = 5.8
   #Initial Camera Z distance.
   cameraZDepth = 10
 
   # A function to be called when the window is resized.
   @resize = () ->
-    renderer.setSize(window.innerWidth,window.innerHeight)
-    camera.aspect = window.innerWidth / window.innerHeight
+    renderer.setSize(@width,@height)
+    camera.aspect = @width / @height
     camera.fov = 360*Math.atan(Math.min(
       maxCameraViewHeight,
       maxCameraViewWidth/camera.aspect
@@ -33,7 +39,7 @@ module.exports = ->
   @render = () ->
     renderer.render(scene,camera)
     hexMesh.material.uniforms.time.value = @time
-    hexMesh.material.uniforms.currentScroll.value = 0.005*@currentScroll
+    hexMesh.material.uniforms.currentScroll.value = @currentScroll/@height
     hexMesh.material.uniforms.needsUpdate = true
 
   # Create the scene and camera
@@ -64,10 +70,9 @@ module.exports = ->
   )
 
   #TODO: Adjust center
-  hexMesh.position.set(-8,-7,0)
+  hexMesh.position.set(-7.5,-7,0)
+  console.log("HEY")
   scene.add(hexMesh)
 
-  @time = 0
-  @currentScroll = 0
   return
 

@@ -89,6 +89,8 @@ backdrop = new Backdrop
 
 resize = () ->
   $("#splash").attr("style","height:"+window.innerHeight+"px");
+  backdrop.width = window.innerWidth
+  backdrop.height = window.innerHeight
   backdrop.resize()
 
 window.addEventListener("resize",resize)
