@@ -54,8 +54,14 @@ $("#comedown core-icon-button").click(->
 )
 
 window.addEventListener("hashchange", reloadProject, true)
-reloadProject()
 
+# Parallaxin
+
+#The current scroll position
+currentScroll = 0
+$(window).scroll(()->
+  currentScroll = getScrollTop()
+)
 ###
 scrollProjectPictures = () ->
   console.log(pages.selected)
@@ -74,4 +80,37 @@ inViewOnRight = (image, container) ->
   #0 if not in view, 1 if partially in view, 2 if fully in view
   return containerLeft <= elemLeft
 ###
-require("backdrop/core")
+reloadProject()
+
+@clock = new THREE.Clock()
+clock.start()
+Backdrop = require("backdrop/Backdrop")
+backdrop = new Backdrop
+
+resize = () ->
+  $("#splash").attr("style","height:"+window.innerHeight+"px");
+  backdrop.resize()
+
+window.addEventListener("resize",resize)
+resize()
+
+#The normalized time
+time = 0
+
+
+renderloop = () ->
+  if window.requestAnimationFrame?
+    window.requestAnimationFrame(renderloop)
+  else
+    setTimeout(renderloop,1000/60)
+  #Update time
+  time += Math.min(clock.getDelta(),0.1)
+
+  #Sync variables
+  backdrop.time = time
+  backdrop.currentScroll = currentScroll
+
+  backdrop.render()
+
+renderloop()
+resize()
