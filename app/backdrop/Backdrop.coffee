@@ -71,7 +71,6 @@ module.exports = ->
 
   #TODO: Adjust center
   hexMesh.position.set(-7.5,-7,0)
-  console.log("HEY")
   scene.add(hexMesh)
 
   return
