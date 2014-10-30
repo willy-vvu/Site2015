@@ -99,12 +99,35 @@ resize()
 #The normalized time
 time = 0
 
+scrollVelocity = 0
+maxScrollHeight = Infinity
+#Smooth scrolling
+window.addEventListener("mousewheel",(event)->
+  scrollVelocity += event.deltaY
+  maxScrollHeight = Math.max(document.body.scrollHeight,document.documentElement.scrollHeight)-window.innerHeight
+  event.preventDefault()
+)
 
 renderloop = () ->
   if window.requestAnimationFrame?
     window.requestAnimationFrame(renderloop)
   else
     setTimeout(renderloop,1000/60)
+
+  #Smooth scroll
+  if scrollVelocity isnt 0
+    currentScroll += scrollVelocity * 0.1
+    if currentScroll < 0
+      currentScroll = 0
+      scrollVelocity = 0
+    if currentScroll > maxScrollHeight
+      currentScroll = maxScrollHeight
+      scrollVelocity = 0
+    $("html, body").scrollTop(currentScroll)
+    if Math.abs(scrollVelocity)<1
+      scrollVelocity = 0
+    scrollVelocity *= 0.9
+
   #Update time
   time += Math.min(clock.getDelta(),0.1)
 

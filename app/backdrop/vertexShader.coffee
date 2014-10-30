@@ -10,7 +10,7 @@ varying float ao;
 varying float aoMask;
 uniform float time;
 uniform float currentScroll;
-float currentScrollOffset = currentScroll * 5.0;
+float currentScrollOffset = currentScroll * 7.0;
 float pseudoChiSquared(float x){
   return x/(x*x+1.0);
 }
@@ -19,7 +19,10 @@ float getHeight(vec2 coord){
   float phase = max(mod(-0.5*time+0.07*length(coord),1.0)*4.0-3.0,0.0);
   float contentFactor = max(min(5.0*(-coord.y*0.125-1.0+currentScroll*1.0),1.0),0.0);
   float ripple = time<2.0?0.5*pseudoChiSquared(10.0-10.0*phase):0.0;
-  return ripple + ((2.0+max(coord.x*coord.x*0.005-0.1,0.0))*contentFactor+(1.0-contentFactor)*min(0.05*dot(coord,coord),max(0.0,2.0*(time-2.0))));
+  return ripple + 2.0*contentFactor+(1.0-contentFactor)*min(0.05*dot(coord,coord),max(0.0,1.0*(time-2.0)));
+  /*float contentFactor = max(min(currentScroll*1.0,1.0),0.0);
+  float ripple = 0.5*pseudoChiSquared(10.0-10.0*phase);
+  return ripple*(1.0-contentFactor) + 0.2*max(0.0,sin(coord.y+coord.x*0.1))*max(0.0,0.05*coord.x*coord.x-1.0);/* + ((2.0)*contentFactor+(1.0-contentFactor)+min(0.02*dot(coord,coord),max(0.0,1.0*(time-2.0))));*/
 }
 void main(){
   float order = floor(position.z / 7.0);
