@@ -7,15 +7,7 @@
   <meta name="description" content="A curious student exploring the realm where imagination, visual design, and web technologies collide.">
   <meta name="author" content="William Wu">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0" />
-  <script src="bower_components/platform/platform.js"></script>
-  <!--  <link rel="import" href="bower_components/font-roboto/roboto.html">-->
-  <link rel="import" href="bower_components/paper-button/paper-button.html">
-  <link rel="import" href="bower_components/core-icon-button/core-icon-button.html">
-  <link rel="import" href="bower_components/core-icons/core-icons.html">
-  <link rel="import" href="bower_components/core-animated-pages/core-animated-pages.html">
-  <link rel="import" href="elements/project-list.html">
-  <link rel="import" href="elements/detail-view.html">
-  <link rel="import" href="elements/quote-carousel.html">
+
   <link rel="stylesheet" href="app.css" />
   <script>
     (function (i, s, o, g, r, a, m) {
@@ -36,8 +28,17 @@
 </head>
 
 <body>
+  <script src="bower_components/platform/platform.js"></script>
+  <!--  <link rel="import" href="bower_components/font-roboto/roboto.html">-->
+  <link rel="import" href="bower_components/paper-button/paper-button.html">
+  <link rel="import" href="bower_components/core-icon-button/core-icon-button.html">
+  <link rel="import" href="bower_components/core-icons/core-icons.html">
+  <link rel="import" href="bower_components/core-animated-pages/core-animated-pages.html">
+  <link rel="import" href="elements/project-list.html">
+  <link rel="import" href="elements/detail-view.html">
+  <link rel="import" href="elements/quote-carousel.html">
   <div id="backdrop"></div>
-  <section id="splash" style="height: 100%;">
+  <section id="splash" style="height: 100%; opacity: 0;">
     <div style="height: 50%;"></div>
     <img src="Logo.png" />
     <h1>William Wu</h1>
@@ -46,7 +47,7 @@
       <core-icon-button icon="expand-more"></core-icon-button>
     </div>
   </section>
-  <span id="quickscroll"></span>
+  <span class="quickscroll"></span>
   <core-animated-pages id="pages" selected="1" transitions="hero-transition cross-fade cross-fade-delayed">
     <detail-view id="detail"></detail-view>
     <project-list id="projects"></project-list>

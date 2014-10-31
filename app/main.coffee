@@ -29,7 +29,7 @@ loadProject = (id, initially) ->
     mainScroll = getScrollTop()
     if(!initially)
       scrollTo($(pages).offset().top, 300)
-    document.getElementById("quickscroll").id=project.id;
+    $(".quickscroll").attr("id",project.id);
   else
     pages.setAttribute("selected", 1)
     pages.selected = 1
@@ -88,7 +88,8 @@ Backdrop = require("backdrop/Backdrop")
 backdrop = new Backdrop
 
 resize = () ->
-  $("#splash").attr("style","height:"+window.innerHeight+"px");
+  #$("#splash").css("height",window.innerHeight);
+  #Hefully I can use the backdrop container size instead
   backdrop.width = window.innerWidth
   backdrop.height = window.innerHeight
   backdrop.resize()
@@ -128,8 +129,20 @@ renderloop = () ->
       scrollVelocity = 0
     scrollVelocity *= 0.9
 
+  delta = Math.min(clock.getDelta(),0.1)
+
+  #Fade in logo if it's time
+  if (time<2) and (delta+time>=2)
+    $("#splash").fadeTo(1000,1)
+    $("#splash quote-carousel")[0].run()
+
+  #Check the width and height sometimes to detect resize (a workaround)
+  if (time % 1) > (time + delta) % 1
+    if (backdrop.width isnt window.innerWidth)
+      resize()
+
   #Update time
-  time += Math.min(clock.getDelta(),0.1)
+  time += delta
 
   #Sync variables
   backdrop.time = time

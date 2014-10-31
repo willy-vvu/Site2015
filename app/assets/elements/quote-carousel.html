@@ -12,7 +12,7 @@
   </template>
   <script>
     Polymer({
-      ready: function () {
+      run: function () {
         var that = this;
         var changeQuote = function () {
           if (that.$.quotes.selected < that.data.length - 1) {
@@ -20,9 +20,9 @@
           } else {
             that.$.quotes.selected = 0;
           }
-          setTimeout(changeQuote, 5000);
+          setTimeout(changeQuote, 8000);
         }
-        setTimeout(changeQuote, 5000);
+        setTimeout(changeQuote, 8000);
       }
     })
   </script>

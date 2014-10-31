@@ -9,6 +9,9 @@
         padding: 1.5% 0;
         margin: 0;
       }
+      :host a {
+        color: inherit;
+      }
       /*Individual project*/
       li {
         list-style: none;
@@ -18,7 +21,7 @@
       }
       /*Project thumbnails*/
       li div {
-        margin: 4px 8px;
+        margin: 0 16px 8px 16px;
         padding: 15% 0;
         min-height: 100px;
         background-size: cover;
@@ -30,18 +33,13 @@
       }
       /*Label for each project*/
       label {
-        font-weight: 100;
-        font-size: 32px;
-        position: absolute;
-        bottom: 0;
+        margin-bottom: 32px;
+        display: block;
+        font-weight: 200;
+        font-size: 24px;
         text-align: center;
-        left: 0;
-        right: 0;
         height: 40px;
-        padding-bottom: 6px;
-        color: white;
         cursor: inherit;
-        background-color: rgba(0, 0, 0, 0.5);
         /*  background-image: radial-gradient(ellipse 70% 100% at 50% 0%, rgba(0, 0, 0, 0.78), rgba(34, 33, 33, 0));*/
         /*  background-image: radial-gradient(at 50% 0%, rgba(0, 0, 0, 0.78), rgba(34, 33, 33, 0.5));*/
       }
@@ -74,9 +72,9 @@
         <a href="#{{project.id}}">
           <li>
             <div cross-fade hero-id="{{project.id}}" hero style="background-image:url('content/{{project.id}}/{{project.images[0]}}');">
-              <label>{{project.name}}</label>
               <paper-ripple class="recenteringTouch" fit></paper-ripple>
             </div>
+            <label>{{project.name}}</label>
           </li>
         </a>
       </template>
