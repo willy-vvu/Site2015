@@ -8,6 +8,7 @@ module.exports = "
 varying float diffuse;
 varying float ao;
 varying float aoMask;
+varying vec3 side;
 uniform float time;
 uniform float currentScroll;
 float currentScrollOffset = currentScroll * 7.0;
@@ -43,36 +44,42 @@ void main(){
 
   }
   else if(id < 1.5){
+    side.x = 1.0;
     heightDiff += max(
       getHeight(coord+vec2(-HEX_X,HEX_Y)),
       getHeight(coord+vec2(HEX_X,HEX_Y))
     );
   }
   else if(id < 2.5){
+    side.y = 1.0;
     heightDiff += max(
       getHeight(coord+vec2(HEX_X,HEX_Y)),
       getHeight(coord+vec2(HEX_2X,0.0))
     );
   }
   else if(id < 3.5){
+    side.z = 1.0;
     heightDiff += max(
       getHeight(coord+vec2(HEX_2X,0.0)),
       getHeight(coord+vec2(HEX_X,-HEX_Y))
     );
   }
   else if(id < 4.5){
+    side.x = 1.0;
     heightDiff += max(
       getHeight(coord+vec2(HEX_X,-HEX_Y)),
       getHeight(coord+vec2(-HEX_X,-HEX_Y))
     );
   }
   else if(id < 5.5){
+    side.y = 1.0;
     heightDiff += max(
       getHeight(coord+vec2(-HEX_X,-HEX_Y)),
       getHeight(coord+vec2(-HEX_2X,0.0))
     );
   }
   else{
+    side.z = 1.0;
     heightDiff += max(
       getHeight(coord+vec2(-HEX_2X,0.0)),
       getHeight(coord+vec2(-HEX_X,HEX_Y))
