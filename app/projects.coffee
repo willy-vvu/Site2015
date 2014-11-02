@@ -139,4 +139,37 @@ module.exports = [
       "Kapparate"
     ]
   }
+  {
+    id: "revealjs"
+    name: "Gestures + Reveal.js"
+    date: "November 2012"
+    images: [
+      "Screenshot (1).png"
+      "Screenshot (2).png"
+      "Screenshot (3).png"
+      "Screenshot (4).png"
+    ]
+    links: [
+      {
+        text: "View the Demo"
+        href: "http://revealjs.herokuapp.com"
+      }
+      {
+        text: "View on Youtube"
+        href: "https://www.youtube.com/watch?v=bXF68hNPuNo"
+      }
+      {
+        text: "View on Chrome Experiments"
+        href: "http://www.chromeexperiments.com/detail/gesture-based-revealjs"
+      }
+      {
+        text: "View on Github"
+        href: "https://github.com/willy-vvu/reveal.js"
+      }
+    ]
+    tags: [
+      "reveal.js"
+      "Web RTC"
+    ]
+  }
 ]
