@@ -25,9 +25,6 @@
     ga('create', 'UA-55782285-1', 'auto');
     ga('send', 'pageview');
   </script>
-</head>
-
-<body>
   <script src="bower_components/platform/platform.js"></script>
   <!--  <link rel="import" href="bower_components/font-roboto/roboto.html">-->
   <link rel="import" href="bower_components/paper-button/paper-button.html">
@@ -37,9 +34,14 @@
   <link rel="import" href="elements/project-list.html">
   <link rel="import" href="elements/detail-view.html">
   <link rel="import" href="elements/quote-carousel.html">
+</head>
+
+<body>
   <div id="backdrop"></div>
   <section id="splash" style="height: 100%; opacity: 0;">
-    <div style="height: 50%;"></div>
+    <div style="height: 50%;">
+      <audio controls src="Aika.mp3" id="audio"></audio>
+    </div>
     <img src="Logo.png" />
     <h1>William Wu</h1>
     <quote-carousel id="quotes"></quote-carousel>

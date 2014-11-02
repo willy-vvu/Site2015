@@ -5,25 +5,36 @@ module.exports = "
 #define HEX_X 0.25 \n
 #define HEX_2X 0.5 \n
 #define UPPER \n
+#define AUDIO_DATA_LENGTH 1024 \n
 varying float diffuse;
 varying float ao;
 varying float aoMask;
 varying vec3 side;
 uniform float time;
 uniform float currentScroll;
+uniform float concavity;
 float currentScrollOffset = currentScroll * 7.0;
 float pseudoChiSquared(float x){
   return x/(x*x+1.0);
 }
+float getProgression(float time, vec2 coord){
+  return clamp(3.0*(2.0*time-0.14*length(coord)),0.0,1.0);
+}
+float rippleFactor(float time, vec2 coord){
+  float progression = getProgression(time,coord);
+  return max(5.0*(1.0-time),1.0)*pseudoChiSquared(10.0*progression);
+}
 float getHeight(vec2 coord){
   coord.y-=SQRT3*floor(currentScrollOffset/SQRT3);
-  float phase = max(mod(-0.5*time+0.07*length(coord),1.0)*4.0-3.0,0.0);
-  float contentFactor = max(min(5.0*(-coord.y*0.125-1.0+currentScroll*1.0),1.0),0.0);
-  float ripple = time<2.0?0.5*pseudoChiSquared(10.0-10.0*phase):0.0;
-  return ripple + 2.0*contentFactor+(1.0-contentFactor)*min(0.05*dot(coord,coord),max(0.0,1.0*(time-2.0)));
-  /*float contentFactor = max(min(currentScroll*1.0,1.0),0.0);
-  float ripple = 0.5*pseudoChiSquared(10.0-10.0*phase);
-  return ripple*(1.0-contentFactor) + 0.2*max(0.0,sin(coord.y+coord.x*0.1))*max(0.0,0.05*coord.x*coord.x-1.0);/* + ((2.0)*contentFactor+(1.0-contentFactor)+min(0.02*dot(coord,coord),max(0.0,1.0*(time-2.0))));*/
+
+  float contentFactor = clamp(5.0*(-coord.y*0.125-1.0+currentScroll*1.0),0.0,1.0);
+
+  float ripple = time<2.0?rippleFactor(time*0.5,coord):0.0;
+
+  float concavityFactor = time<4.0?clamp(concavity-min(1.0-0.5*(time-2.0),1.0),0.0,1.0):concavity;
+  return ripple + contentFactor+(1.0-contentFactor)*min(0.05*dot(coord,coord)-3.0,0.0)*getProgression(concavityFactor,coord);
+
+/**min(0.05*dot(coord,coord)-3.0*concavityFactor,0.0)*/
 }
 void main(){
   float order = floor(position.z / 7.0);

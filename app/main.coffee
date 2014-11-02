@@ -84,8 +84,13 @@ reloadProject()
 
 @clock = new THREE.Clock()
 clock.start()
+
+Audio = require("Audio")
+audio = new Audio()
+
 Backdrop = require("backdrop/Backdrop")
-backdrop = new Backdrop
+backdrop = new Backdrop(audio.array)
+
 
 resize = () ->
   #$("#splash").css("height",window.innerHeight);
@@ -134,7 +139,7 @@ renderloop = () ->
   #Fade in logo if it's time
   if (time<2) and (delta+time>=2)
     $("#splash").fadeTo(1000,1)
-    $("#splash quote-carousel")[0].run()
+    quotes.run()
 
   #Check the width and height sometimes to detect resize (a workaround)
   if (time % 1) > (time + delta) % 1
@@ -144,11 +149,15 @@ renderloop = () ->
   #Update time
   time += delta
 
+  #Analyze audio
+  audio.analyse()
+
   #Sync variables
   backdrop.time = time
   backdrop.currentScroll = currentScroll
-
+  backdrop.audioData = audio.array
   backdrop.render()
+
 
 renderloop()
 resize()

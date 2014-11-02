@@ -2,7 +2,7 @@
 Backdrop.coffee
 A file in charge of setting up and rendering the hexagonal display.
 ###
-module.exports = ->
+module.exports = (@audioData)->
   HexGeometry = require("backdrop/HexGeometry")
   hexSide = 16 # The number of hexes on one side
   backdrop = document.getElementById("backdrop")
@@ -20,8 +20,8 @@ module.exports = ->
 
   #The below are used for FOV calculations.
   #The makimum allowable bounds in the world the camera can see
-  maxCameraViewWidth = 7.5
-  maxCameraViewHeight = 5.8
+  maxCameraViewWidth = 7.0
+  maxCameraViewHeight = 5.3
   #Initial Camera Z distance.
   cameraZDepth = 10
 
@@ -62,6 +62,10 @@ module.exports = ->
         currentScroll:{
           type:"f"
           value:0
+        }
+        concavity:{
+          type:"f"
+          value:1
         }
       }
       shading:THREE.FlatShading
