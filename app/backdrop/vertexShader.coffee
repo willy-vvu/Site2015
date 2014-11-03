@@ -5,7 +5,7 @@ module.exports = "
 #define HEX_X 0.25 \n
 #define HEX_2X 0.5 \n
 #define UPPER \n
-#define AUDIO_DATA_LENGTH 1024 \n
+#define RIPPLE_LENGTH 4 \n
 varying float diffuse;
 varying float ao;
 varying float aoMask;
@@ -13,6 +13,7 @@ varying vec3 side;
 uniform float time;
 uniform float currentScroll;
 uniform float concavity;
+uniform float ripples[RIPPLE_LENGTH];
 float currentScrollOffset = currentScroll * 7.0;
 float pseudoChiSquared(float x){
   return x/(x*x+1.0);
@@ -31,8 +32,15 @@ float getHeight(vec2 coord){
 
   float ripple = time<2.0?rippleFactor(time*0.5,coord):0.0;
 
+  if(time>2.0){
+    for(int i = 0; i < RIPPLE_LENGTH; i++){
+      float elapsed = time-ripples[i];
+      ripple+=0.5*rippleFactor(elapsed>1.0?0.0:elapsed,coord);
+    }
+  }
+
   float concavityFactor = time<4.0?clamp(concavity-min(1.0-0.5*(time-2.0),1.0),0.0,1.0):concavity;
-  return ripple + contentFactor+(1.0-contentFactor)*min(0.05*dot(coord,coord)-3.0,0.0)*getProgression(concavityFactor,coord);
+  return (1.0-contentFactor)*(ripple+min(0.05*dot(coord,coord)-3.0,0.0)*getProgression(concavityFactor,coord));
 
 /**min(0.05*dot(coord,coord)-3.0*concavityFactor,0.0)*/
 }

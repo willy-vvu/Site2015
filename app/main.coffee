@@ -86,7 +86,14 @@ reloadProject()
 clock.start()
 
 Audio = require("Audio")
-audio = new Audio()
+window.audio = new Audio()
+window.freq=0
+window.BEAT_THRESHOLD = 3
+BPM = 140
+#16 subdivisions
+BEAT_DELAY = (60000/140)/16
+timeUntilNextBeat = 0
+currentRipple = 0
 
 Backdrop = require("backdrop/Backdrop")
 backdrop = new Backdrop(audio.array)
@@ -155,7 +162,21 @@ renderloop = () ->
   #Sync variables
   backdrop.time = time
   backdrop.currentScroll = currentScroll
-  backdrop.audioData = audio.array
+  if timeUntilNextBeat <=0
+      if audio.avg - audio.lastAvg > BEAT_THRESHOLD
+        #send another wave going!
+        backdrop.ripples[currentRipple]=time
+        currentRipple++
+        currentRipple%=backdrop.ripples.length
+        timeUntilNextBeat = BEAT_DELAY
+#        console.log(backdrop.ripples)
+  else
+    timeUntilNextBeat--
+  if audio.avg == 0
+    backdrop.concavity = 0.99*backdrop.concavity+0.01
+  else
+    backdrop.concavity = 0.5*backdrop.concavity+0.5*(audio.avg/100)
+
   backdrop.render()
 
 
