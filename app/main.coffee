@@ -175,7 +175,7 @@ renderloop = () ->
   if audio.avg == 0
     backdrop.concavity = 0.99*backdrop.concavity+0.01
   else
-    backdrop.concavity = 0.5*backdrop.concavity+0.5*(audio.avg/100)
+    backdrop.concavity = 0.5*backdrop.concavity+0.5*(audio.avg/80)
 
   backdrop.render()
 

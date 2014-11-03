@@ -9,7 +9,9 @@ module.exports = "
 varying float diffuse;
 varying float ao;
 varying float aoMask;
-varying vec3 side;
+varying float sideX;
+varying float sideY;
+varying float sideZ;
 uniform float time;
 uniform float currentScroll;
 uniform float concavity;
@@ -34,7 +36,7 @@ float getHeight(vec2 coord){
 
   if(time>2.0){
     for(int i = 0; i < RIPPLE_LENGTH; i++){
-      float elapsed = time-ripples[i];
+      float elapsed = 0.5*(time-ripples[i]);
       ripple+=0.5*rippleFactor(elapsed>1.0?0.0:elapsed,coord);
     }
   }
@@ -63,42 +65,42 @@ void main(){
 
   }
   else if(id < 1.5){
-    side.x = 1.0;
+    sideX = 1.0;
     heightDiff += max(
       getHeight(coord+vec2(-HEX_X,HEX_Y)),
       getHeight(coord+vec2(HEX_X,HEX_Y))
     );
   }
   else if(id < 2.5){
-    side.y = 1.0;
+    sideY = 1.0;
     heightDiff += max(
       getHeight(coord+vec2(HEX_X,HEX_Y)),
       getHeight(coord+vec2(HEX_2X,0.0))
     );
   }
   else if(id < 3.5){
-    side.z = 1.0;
+    sideZ = 1.0;
     heightDiff += max(
       getHeight(coord+vec2(HEX_2X,0.0)),
       getHeight(coord+vec2(HEX_X,-HEX_Y))
     );
   }
   else if(id < 4.5){
-    side.x = 1.0;
+    sideX = 1.0;
     heightDiff += max(
       getHeight(coord+vec2(HEX_X,-HEX_Y)),
       getHeight(coord+vec2(-HEX_X,-HEX_Y))
     );
   }
   else if(id < 5.5){
-    side.y = 1.0;
+    sideY = 1.0;
     heightDiff += max(
       getHeight(coord+vec2(-HEX_X,-HEX_Y)),
       getHeight(coord+vec2(-HEX_2X,0.0))
     );
   }
   else{
-    side.z = 1.0;
+    sideZ = 1.0;
     heightDiff += max(
       getHeight(coord+vec2(-HEX_2X,0.0)),
       getHeight(coord+vec2(-HEX_X,HEX_Y))
