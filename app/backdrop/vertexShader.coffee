@@ -36,7 +36,7 @@ float getHeight(vec2 coord){
 
   if(time>2.0){
     for(int i = 0; i < RIPPLE_LENGTH; i++){
-      float elapsed = 0.5*(time-ripples[i]);
+      float elapsed = 1.0*(time-ripples[i]);
       ripple+=0.5*rippleFactor(elapsed>1.0?0.0:elapsed,coord);
     }
   }

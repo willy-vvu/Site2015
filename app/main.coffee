@@ -162,7 +162,7 @@ renderloop = () ->
   #Sync variables
   backdrop.time = time
   backdrop.currentScroll = currentScroll
-  if timeUntilNextBeat <=0
+  ###if timeUntilNextBeat <=0
       if audio.avg - audio.lastAvg > BEAT_THRESHOLD
         #send another wave going!
         backdrop.ripples[currentRipple]=time
@@ -171,7 +171,7 @@ renderloop = () ->
         timeUntilNextBeat = BEAT_DELAY
 #        console.log(backdrop.ripples)
   else
-    timeUntilNextBeat--
+    timeUntilNextBeat--###
   if audio.avg == 0
     backdrop.concavity = 0.99*backdrop.concavity+0.01
   else
