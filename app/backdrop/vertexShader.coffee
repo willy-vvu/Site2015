@@ -5,7 +5,7 @@ module.exports = "
 #define HEX_X 0.25 \n
 #define HEX_2X 0.5 \n
 #define UPPER \n
-#define RIPPLE_LENGTH 4 \n
+#define AUDIO_DATA_LENGTH 30 \n
 varying float diffuse;
 varying float ao;
 varying float aoMask;
@@ -15,7 +15,8 @@ varying float sideZ;
 uniform float time;
 uniform float currentScroll;
 uniform float concavity;
-uniform float ripples[RIPPLE_LENGTH];
+uniform int audioDataIndex;
+uniform float audioData[AUDIO_DATA_LENGTH];
 float currentScrollOffset = currentScroll * 7.0;
 float pseudoChiSquared(float x){
   return x/(x*x+1.0);
@@ -27,22 +28,34 @@ float rippleFactor(float time, vec2 coord){
   float progression = getProgression(time,coord);
   return max(5.0*(1.0-time),1.0)*pseudoChiSquared(10.0*progression);
 }
+float getAudioData(int index){
+  return audioData[int(mod(float(audioDataIndex+index),float(AUDIO_DATA_LENGTH)))]*(1.0-float(index)/float(AUDIO_DATA_LENGTH));
+}
 float getHeight(vec2 coord){
   coord.y-=SQRT3*floor(currentScrollOffset/SQRT3);
 
   float contentFactor = clamp(5.0*(-coord.y*0.125-1.0+currentScroll*1.0),0.0,1.0);
 
   float ripple = time<2.0?rippleFactor(time*0.5,coord):0.0;
-
+  float audioRipple = 0.0;
   if(time>2.0){
-    for(int i = 0; i < RIPPLE_LENGTH; i++){
-      float elapsed = 1.0*(time-ripples[i]);
-      ripple+=0.5*rippleFactor(elapsed>1.0?0.0:elapsed,coord);
+    float index = length(coord)*float(AUDIO_DATA_LENGTH)/6.0;
+    float audioDataLeft = 0.0;
+    float audioDataRight = 0.0;
+    int indexLeft = int(floor(index));
+    if(indexLeft < AUDIO_DATA_LENGTH){
+      audioDataLeft = getAudioData(indexLeft);
     }
+    int indexRight = int(ceil(index));
+    if(indexRight < AUDIO_DATA_LENGTH){
+      audioDataRight = getAudioData(indexRight);
+    }
+    float indexFactor = mod(index,1.0);
+    audioRipple+=(1.0-indexFactor)*audioDataLeft+indexFactor*audioDataRight;
   }
 
   float concavityFactor = time<4.0?clamp(concavity-min(1.0-0.5*(time-2.0),1.0),0.0,1.0):concavity;
-  return (1.0-contentFactor)*(ripple+min(0.05*dot(coord,coord)-3.0,0.0)*getProgression(concavityFactor,coord));
+  return (1.0-contentFactor)*(ripple-audioRipple*(1.0-concavity)+min(0.05*dot(coord,coord)-3.0,0.0)*getProgression(concavityFactor,coord));
 
 /**min(0.05*dot(coord,coord)-3.0*concavityFactor,0.0)*/
 }

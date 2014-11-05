@@ -18,7 +18,8 @@ module.exports = (@audioData)->
   @concavity = 0
   @height = 0
   @width = 0
-  @ripples = [0,0,0,0]
+  @audioData = new Array(30)
+  @audioDataIndex = 0
 
   #The below are used for FOV calculations.
   #The makimum allowable bounds in the world the camera can see
@@ -43,6 +44,7 @@ module.exports = (@audioData)->
     hexMesh.material.uniforms.time.value = @time
     hexMesh.material.uniforms.currentScroll.value = @currentScroll/@height
     hexMesh.material.uniforms.concavity.value = @concavity
+    hexMesh.material.uniforms.audioDataIndex.value = @audioDataIndex
     hexMesh.material.uniforms.needsUpdate = true
 
   # Create the scene and camera
@@ -70,9 +72,13 @@ module.exports = (@audioData)->
           type:"f"
           value:1
         }
-        ripples:{
+        audioData:{
           type:"fv1"
-          value:@ripples
+          value:@audioData
+        }
+        audioDataIndex:{
+          type:"i"
+          value:@audioDataIndex
         }
       }
       shading:THREE.FlatShading

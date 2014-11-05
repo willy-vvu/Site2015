@@ -18,7 +18,7 @@ module.exports = () ->
   @analyse = () ->
     @analyser.getByteFrequencyData(@freqArray)
     @analyser.getByteTimeDomainData(@timeArray)
-    @lastAvg = @avg
+    #@lastAvg = @avg
     @avg = 0
     for val in @timeArray
       @avg += Math.abs(128-val)
