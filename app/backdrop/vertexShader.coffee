@@ -5,13 +5,11 @@ module.exports = "
 #define HEX_X 0.25 \n
 #define HEX_2X 0.5 \n
 #define UPPER \n
-#define AUDIO_DATA_LENGTH 30 \n
+#define AUDIO_DATA_LENGTH 10 \n
 varying float diffuse;
 varying float ao;
 varying float aoMask;
-varying float sideX;
-varying float sideY;
-varying float sideZ;
+varying vec3 side;
 uniform float time;
 uniform float currentScroll;
 uniform float concavity;
@@ -78,42 +76,42 @@ void main(){
 
   }
   else if(id < 1.5){
-    sideX = 1.0;
+    side = vec3(1.0,0.0,0.0);
     heightDiff += max(
       getHeight(coord+vec2(-HEX_X,HEX_Y)),
       getHeight(coord+vec2(HEX_X,HEX_Y))
     );
   }
   else if(id < 2.5){
-    sideY = 1.0;
+    side = vec3(0.0,1.0,0.0);
     heightDiff += max(
       getHeight(coord+vec2(HEX_X,HEX_Y)),
       getHeight(coord+vec2(HEX_2X,0.0))
     );
   }
   else if(id < 3.5){
-    sideZ = 1.0;
+    side = vec3(0.0,0.0,1.0);
     heightDiff += max(
       getHeight(coord+vec2(HEX_2X,0.0)),
       getHeight(coord+vec2(HEX_X,-HEX_Y))
     );
   }
   else if(id < 4.5){
-    sideX = 1.0;
+    side = vec3(1.0,0.0,0.0);
     heightDiff += max(
       getHeight(coord+vec2(HEX_X,-HEX_Y)),
       getHeight(coord+vec2(-HEX_X,-HEX_Y))
     );
   }
   else if(id < 5.5){
-    sideY = 1.0;
+    side = vec3(0.0,1.0,0.0);
     heightDiff += max(
       getHeight(coord+vec2(-HEX_X,-HEX_Y)),
       getHeight(coord+vec2(-HEX_2X,0.0))
     );
   }
   else{
-    sideZ = 1.0;
+    side = vec3(0.0,0.0,1.0);
     heightDiff += max(
       getHeight(coord+vec2(-HEX_2X,0.0)),
       getHeight(coord+vec2(-HEX_X,HEX_Y))

@@ -2,19 +2,17 @@ module.exports = "
 varying float diffuse;
 varying float ao;
 varying float aoMask;
-varying float sideX;
-varying float sideY;
-varying float sideZ;
+varying vec3 side;
 void main(){
   float maskFactor = min(diffuse,1.0)*max(0.0,aoMask);
   float diffuseColor = 1.0;
-  if(sideX < 0.01){
+  if(side.x < 0.01){
     diffuseColor = 0.75;
   }
-  else if(sideY < 0.01){
+  else if(side.y < 0.01){
     diffuseColor = 0.8;
   }
-  else if(sideZ < 0.01){
+  else if(side.z < 0.01){
     diffuseColor = 0.85;
   }
   diffuseColor = (1.0-diffuseColor)*min(diffuse,1.0)+diffuseColor;

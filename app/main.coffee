@@ -153,7 +153,7 @@ renderloop = () ->
   audio.analyse()
 
   #Get that backdrop dancing
-  audio.lastAvg = Math.max(audio.avg,0.8*audio.lastAvg+0.2*audio.avg)
+  audio.lastAvg = Math.max(audio.avg,0.5*audio.lastAvg+0.5*audio.avg)
   backdrop.audioData[backdrop.audioDataIndex--]=audio.lastAvg/10
   if backdrop.audioDataIndex<0
     backdrop.audioDataIndex=backdrop.audioData.length-1

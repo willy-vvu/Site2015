@@ -10,7 +10,7 @@ module.exports = () ->
   @lastAvg=0
 
   @analyser.fftSize = 2048;
-  @analyser.smoothingTimeConstant = 0.9;
+  @analyser.smoothingTimeConstant = 0.5;
 
   source.connect(@analyser)
   @analyser.connect(context.destination)

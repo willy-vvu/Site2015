@@ -18,7 +18,7 @@ module.exports = (@audioData)->
   @concavity = 0
   @height = 0
   @width = 0
-  @audioData = new Array(30)
+  @audioData = new Array(10)
   @audioDataIndex = 0
 
   #The below are used for FOV calculations.
