@@ -33,5 +33,6 @@
   },
   "_source": "https://github.com/Juicy/juicy-html.git",
   "_target": "~0.0.20140720",
-  "_originalSource": "https://github.com/Juicy/juicy-html.git"
+  "_originalSource": "https://github.com/Juicy/juicy-html.git",
+  "_direct": true
 }
