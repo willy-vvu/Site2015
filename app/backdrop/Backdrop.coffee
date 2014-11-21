@@ -2,7 +2,7 @@
 Backdrop.coffee
 A file in charge of setting up and rendering the hexagonal display.
 ###
-module.exports = (@audioData)->
+module.exports = ()->
   HexGeometry = require("backdrop/HexGeometry")
   hexSide = 16 # The number of hexes on one side
   backdrop = document.getElementById("backdrop")
@@ -18,8 +18,7 @@ module.exports = (@audioData)->
   @concavity = 0
   @height = 0
   @width = 0
-  @audioData = new Array(10)
-  @audioDataIndex = 0
+  @audioData = new Array(8)
 
   #The below are used for FOV calculations.
   #The makimum allowable bounds in the world the camera can see
@@ -44,7 +43,6 @@ module.exports = (@audioData)->
     hexMesh.material.uniforms.time.value = @time
     hexMesh.material.uniforms.currentScroll.value = @currentScroll/@height
     hexMesh.material.uniforms.concavity.value = @concavity
-    hexMesh.material.uniforms.audioDataIndex.value = @audioDataIndex
     hexMesh.material.uniforms.needsUpdate = true
 
   # Create the scene and camera
@@ -75,10 +73,6 @@ module.exports = (@audioData)->
         audioData:{
           type:"fv1"
           value:@audioData
-        }
-        audioDataIndex:{
-          type:"i"
-          value:@audioDataIndex
         }
       }
       shading:THREE.FlatShading

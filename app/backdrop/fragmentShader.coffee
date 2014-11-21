@@ -1,4 +1,4 @@
-module.exports = "
+module.exports = """
 varying float diffuse;
 varying float ao;
 varying float aoMask;
@@ -21,4 +21,4 @@ void main(){
     ((1.0-maskFactor)+maskFactor*(aoColor))*diffuseColor)
   , 1.0);
 }
-"
+"""

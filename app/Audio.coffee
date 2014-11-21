@@ -4,12 +4,10 @@ module.exports = () ->
 
   source = context.createMediaElementSource(audio)
   @analyser = context.createAnalyser()
-  @freqArray = new Uint8Array(@analyser.frequencyBinCount)
-  @timeArray = new Uint8Array(@analyser.frequencyBinCount)
-  @avg=0
-  @lastAvg=0
-
   @analyser.fftSize = 2048;
+  @freqArray = new Uint8Array(@analyser.frequencyBinCount)
+  @avg=0
+
   @analyser.smoothingTimeConstant = 0.5;
 
   source.connect(@analyser)
@@ -17,11 +15,21 @@ module.exports = () ->
 
   @analyse = () ->
     @analyser.getByteFrequencyData(@freqArray)
-    @analyser.getByteTimeDomainData(@timeArray)
-    #@lastAvg = @avg
     @avg = 0
-    for val in @timeArray
-      @avg += Math.abs(128-val)
+    for val in @freqArray
+      @avg += val
     @avg /= @analyser.frequencyBinCount
-  return
 
+  log2 = Math.log(2)
+
+  @getFrequency = (f1,f2) ->
+    # Gets the log-scaled frequency data from the frequency array.
+    # f1 and f2 should be between 0 and 1.
+    leftIndex = Math.floor(@analyser.fftSize * Math.max(0, Math.log(f1+1)/log2))
+    rightIndex = Math.floor(@analyser.fftSize * Math.min(1, Math.log(f2+1)/log2))
+    avg = 0
+    for i in [leftIndex..rightIndex]
+      avg += @freqArray[i]
+    return avg/(rightIndex-leftIndex+1)
+
+  return

@@ -1,11 +1,11 @@
-module.exports = "
-#define HEX_SIDE 16.0 \n
-#define SQRT3 1.7320508075688772 \n
-#define HEX_Y SQRT3/2.0 \n
-#define HEX_X 0.25 \n
-#define HEX_2X 0.5 \n
-#define UPPER \n
-#define AUDIO_DATA_LENGTH 10 \n
+module.exports = """
+#define HEX_SIDE 16.0
+#define SQRT3 1.7320508075688772
+#define HEX_Y SQRT3/2.0
+#define HEX_X 0.25
+#define HEX_2X 0.5
+#define UPPER
+#define AUDIO_DATA_LENGTH 8
 varying float diffuse;
 varying float ao;
 varying float aoMask;
@@ -13,7 +13,6 @@ varying vec3 side;
 uniform float time;
 uniform float currentScroll;
 uniform float concavity;
-uniform int audioDataIndex;
 uniform float audioData[AUDIO_DATA_LENGTH];
 float currentScrollOffset = currentScroll * 7.0;
 float pseudoChiSquared(float x){
@@ -27,7 +26,7 @@ float rippleFactor(float time, vec2 coord){
   return max(5.0*(1.0-time),1.0)*pseudoChiSquared(10.0*progression);
 }
 float getAudioData(int index){
-  return audioData[int(mod(float(audioDataIndex+index),float(AUDIO_DATA_LENGTH)))]*(1.0-float(index)/float(AUDIO_DATA_LENGTH));
+  return audioData[int(float(index))];
 }
 float getHeight(vec2 coord){
   coord.y-=SQRT3*floor(currentScrollOffset/SQRT3);
@@ -37,7 +36,7 @@ float getHeight(vec2 coord){
   float ripple = time<2.0?rippleFactor(time*0.5,coord):0.0;
   float audioRipple = 0.0;
   if(time>2.0){
-    float index = length(coord)*float(AUDIO_DATA_LENGTH)/6.0;
+    float index = length(coord)*float(AUDIO_DATA_LENGTH)/6.5;
     float audioDataLeft = 0.0;
     float audioDataRight = 0.0;
     int indexLeft = int(floor(index));
@@ -139,4 +138,4 @@ void main(){
   vec4 mvPosition = modelViewMatrix * vec4( pos, 1.0 );
   gl_Position = projectionMatrix * mvPosition;
 }
-"
+"""

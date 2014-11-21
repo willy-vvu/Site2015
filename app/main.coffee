@@ -86,11 +86,10 @@ reloadProject()
 clock.start()
 
 Audio = require("Audio")
-window.audio = new Audio()
+audio = new Audio()
 
 Backdrop = require("backdrop/Backdrop")
-backdrop = new Backdrop(audio.array)
-
+backdrop = new Backdrop()
 
 resize = () ->
   #$("#splash").css("height",window.innerHeight);
@@ -149,14 +148,10 @@ renderloop = () ->
   #Update time
   time += delta
 
-  #Analyze audio
+  #Analyze audio to get that backdrop dancing
   audio.analyse()
-
-  #Get that backdrop dancing
-  audio.lastAvg = Math.max(audio.avg,0.5*audio.lastAvg+0.5*audio.avg)
-  backdrop.audioData[backdrop.audioDataIndex--]=audio.lastAvg/10
-  if backdrop.audioDataIndex<0
-    backdrop.audioDataIndex=backdrop.audioData.length-1
+  for i in [0..8]
+    backdrop.audioData[i] = 2*audio.getFrequency(((i) / 11)**1.5, ((i+1) / 11)**1.5)/127
 
   #Sync variables
   backdrop.time = time
