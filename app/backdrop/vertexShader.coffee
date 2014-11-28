@@ -36,7 +36,8 @@ float getHeight(vec2 coord){
   float ripple = time<2.0?rippleFactor(time*0.5,coord):0.0;
   float audioRipple = 0.0;
   if(time>2.0){
-    float index = length(coord)*float(AUDIO_DATA_LENGTH)/6.5;
+    float index = length(coord)*float(AUDIO_DATA_LENGTH)/12.0;
+    index *= index;
     float audioDataLeft = 0.0;
     float audioDataRight = 0.0;
     int indexLeft = int(floor(index));

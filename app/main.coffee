@@ -101,6 +101,7 @@ resize = () ->
 window.addEventListener("resize",resize)
 resize()
 
+window.freqStops = [0,0.02,0.5,0.7,1]
 #The normalized time
 time = 0
 
@@ -150,10 +151,9 @@ renderloop = () ->
 
   #Analyze audio to get that backdrop dancing
   audio.analyse()
-  backdrop.audioData[0] = 2*audio.getFrequency(0.0, 0.1)/127
-  backdrop.audioData[1] = 2*audio.getFrequency(0.1, 0.3)/127
-  backdrop.audioData[2] = 2*audio.getFrequency(0.3, 0.5)/127
-  backdrop.audioData[3] = 2*audio.getFrequency(0.5, 1.0)/127
+  for i in [0..backdrop.audioData.length-1]
+    backdrop.audioData[i] = 2*audio.getFrequency(freqStops[i], freqStops[i+1])/127
+
   #Sync variables
   backdrop.time = time
   backdrop.currentScroll = currentScroll

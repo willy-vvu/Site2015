@@ -23,8 +23,6 @@ module.exports = () ->
   log2 = Math.log(2)
 
   @getFrequency = (f1,f2) ->
-    # Gets the log-scaled frequency data from the frequency array.
-    # f1 and f2 should be between 0 and 1.
     leftIndex = Math.max(0, Math.floor(@analyser.frequencyBinCount * Math.log(f1+1)/log2))
     rightIndex = Math.min(@analyser.frequencyBinCount-1, Math.floor(@analyser.frequencyBinCount * Math.log(f2+1)/log2))
     sum = 0
@@ -32,4 +30,11 @@ module.exports = () ->
       sum = Math.max(sum, @freqArray[i])
     return sum
 
+  #navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia
+  #navigator.getUserMedia({audio:true}, (stream)=>
+  #  streamSource = context.createMediaStreamSource(stream)
+  #  streamSource.connect(@analyser)
+  #,()->)
+
   return
+
