@@ -15,10 +15,10 @@ module.exports = ()->
 
   @time = 0
   @currentScroll = 0
-  @concavity = 0
+  @concavity = 1
   @height = 0
   @width = 0
-  @audioData = new Array(8)
+  @audioData = new Array(4)
 
   #The below are used for FOV calculations.
   #The makimum allowable bounds in the world the camera can see

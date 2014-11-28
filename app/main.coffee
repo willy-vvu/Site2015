@@ -150,9 +150,10 @@ renderloop = () ->
 
   #Analyze audio to get that backdrop dancing
   audio.analyse()
-  for i in [0..8]
-    backdrop.audioData[i] = 2*audio.getFrequency(((i) / 11)**1.5, ((i+1) / 11)**1.5)/127
-
+  backdrop.audioData[0] = 2*audio.getFrequency(0.0, 0.1)/127
+  backdrop.audioData[1] = 2*audio.getFrequency(0.1, 0.3)/127
+  backdrop.audioData[2] = 2*audio.getFrequency(0.3, 0.5)/127
+  backdrop.audioData[3] = 2*audio.getFrequency(0.5, 1.0)/127
   #Sync variables
   backdrop.time = time
   backdrop.currentScroll = currentScroll

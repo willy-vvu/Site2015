@@ -25,11 +25,11 @@ module.exports = () ->
   @getFrequency = (f1,f2) ->
     # Gets the log-scaled frequency data from the frequency array.
     # f1 and f2 should be between 0 and 1.
-    leftIndex = Math.floor(@analyser.fftSize * Math.max(0, Math.log(f1+1)/log2))
-    rightIndex = Math.floor(@analyser.fftSize * Math.min(1, Math.log(f2+1)/log2))
-    avg = 0
+    leftIndex = Math.max(0, Math.floor(@analyser.frequencyBinCount * Math.log(f1+1)/log2))
+    rightIndex = Math.min(@analyser.frequencyBinCount-1, Math.floor(@analyser.frequencyBinCount * Math.log(f2+1)/log2))
+    sum = 0
     for i in [leftIndex..rightIndex]
-      avg += @freqArray[i]
-    return avg/(rightIndex-leftIndex+1)
+      sum = Math.max(sum, @freqArray[i])
+    return sum
 
   return

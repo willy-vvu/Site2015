@@ -5,7 +5,7 @@ module.exports = """
 #define HEX_X 0.25
 #define HEX_2X 0.5
 #define UPPER
-#define AUDIO_DATA_LENGTH 8
+#define AUDIO_DATA_LENGTH 4
 varying float diffuse;
 varying float ao;
 varying float aoMask;
@@ -26,7 +26,7 @@ float rippleFactor(float time, vec2 coord){
   return max(5.0*(1.0-time),1.0)*pseudoChiSquared(10.0*progression);
 }
 float getAudioData(int index){
-  return audioData[int(float(index))];
+  return audioData[index];
 }
 float getHeight(vec2 coord){
   coord.y-=SQRT3*floor(currentScrollOffset/SQRT3);
@@ -48,6 +48,12 @@ float getHeight(vec2 coord){
       audioDataRight = getAudioData(indexRight);
     }
     float indexFactor = mod(index,1.0);
+    if(indexFactor<0.5){
+      indexFactor = 0.2*indexFactor;
+    }
+    else{
+      indexFactor = 1.0-0.2*(1.0-indexFactor);
+    }
     audioRipple+=(1.0-indexFactor)*audioDataLeft+indexFactor*audioDataRight;
   }
 
@@ -71,46 +77,46 @@ void main(){
 
   float currentHeight = getHeight(coord);
   float heightDiff = -currentHeight;
+  side = vec3(0.0, 0.0, 0.0);
   if(id < 0.5){
-
   }
   else if(id < 1.5){
-    side = vec3(1.0,0.0,0.0);
+    side.x = 1.0;
     heightDiff += max(
       getHeight(coord+vec2(-HEX_X,HEX_Y)),
       getHeight(coord+vec2(HEX_X,HEX_Y))
     );
   }
   else if(id < 2.5){
-    side = vec3(0.0,1.0,0.0);
+    side.y = 1.0;
     heightDiff += max(
       getHeight(coord+vec2(HEX_X,HEX_Y)),
       getHeight(coord+vec2(HEX_2X,0.0))
     );
   }
   else if(id < 3.5){
-    side = vec3(0.0,0.0,1.0);
+    side.z = 1.0;
     heightDiff += max(
       getHeight(coord+vec2(HEX_2X,0.0)),
       getHeight(coord+vec2(HEX_X,-HEX_Y))
     );
   }
   else if(id < 4.5){
-    side = vec3(1.0,0.0,0.0);
+    side.x = 1.0;
     heightDiff += max(
       getHeight(coord+vec2(HEX_X,-HEX_Y)),
       getHeight(coord+vec2(-HEX_X,-HEX_Y))
     );
   }
   else if(id < 5.5){
-    side = vec3(0.0,1.0,0.0);
+    side.y = 1.0;
     heightDiff += max(
       getHeight(coord+vec2(-HEX_X,-HEX_Y)),
       getHeight(coord+vec2(-HEX_2X,0.0))
     );
   }
   else{
-    side = vec3(0.0,0.0,1.0);
+    side.z = 1.0;
     heightDiff += max(
       getHeight(coord+vec2(-HEX_2X,0.0)),
       getHeight(coord+vec2(-HEX_X,HEX_Y))
