@@ -77,57 +77,51 @@ void main(){
   );/*TODO: Adjust Center*/
 
   float currentHeight = getHeight(coord);
-  float heightDiff = -currentHeight;
+  float aoHeightDiff = 0.0;
   side = vec3(0.0, 0.0, 0.0);
+  float upperLeft=getHeight(coord+vec2(-HEX_X,HEX_Y)),
+      upperRight=getHeight(coord+vec2(HEX_X,HEX_Y)),
+      right=getHeight(coord+vec2(HEX_2X,0.0)),
+      lowerRight=getHeight(coord+vec2(HEX_X,-HEX_Y)),
+      lowerLeft=getHeight(coord+vec2(-HEX_X,-HEX_Y)),
+      left=getHeight(coord+vec2(-HEX_2X,0.0));
   if(id < 0.5){
   }
   else if(id < 1.5){
     side.x = 1.0;
-    heightDiff += max(
-      getHeight(coord+vec2(-HEX_X,HEX_Y)),
-      getHeight(coord+vec2(HEX_X,HEX_Y))
-    );
+    aoHeightDiff =
+      max(upperLeft,upperRight)-currentHeight;
   }
   else if(id < 2.5){
     side.y = 1.0;
-    heightDiff += max(
-      getHeight(coord+vec2(HEX_X,HEX_Y)),
-      getHeight(coord+vec2(HEX_2X,0.0))
-    );
+    aoHeightDiff =
+      max(upperRight,right)-currentHeight;
   }
   else if(id < 3.5){
     side.z = 1.0;
-    heightDiff += max(
-      getHeight(coord+vec2(HEX_2X,0.0)),
-      getHeight(coord+vec2(HEX_X,-HEX_Y))
-    );
+    aoHeightDiff =
+      max(right,lowerRight)-currentHeight;
   }
   else if(id < 4.5){
     side.x = 1.0;
-    heightDiff += max(
-      getHeight(coord+vec2(HEX_X,-HEX_Y)),
-      getHeight(coord+vec2(-HEX_X,-HEX_Y))
-    );
+    aoHeightDiff =
+      max(lowerRight,lowerLeft)-currentHeight;
   }
   else if(id < 5.5){
     side.y = 1.0;
-    heightDiff += max(
-      getHeight(coord+vec2(-HEX_X,-HEX_Y)),
-      getHeight(coord+vec2(-HEX_2X,0.0))
-    );
+    aoHeightDiff =
+      max(lowerLeft,left)-currentHeight;
   }
   else{
     side.z = 1.0;
-    heightDiff += max(
-      getHeight(coord+vec2(-HEX_2X,0.0)),
-      getHeight(coord+vec2(-HEX_X,HEX_Y))
-    );
+    aoHeightDiff =
+      max(left,upperRight)-currentHeight;
   }
-  if(heightDiff<0.0){
+  if(aoHeightDiff<0.0){
     ao = -5.0;
   }
   else{
-    ao = min(4.0*heightDiff,1.0);
+    ao = min(4.0*aoHeightDiff,1.0);
   }
 
   if(id < 0.5){
@@ -135,7 +129,7 @@ void main(){
     aoMask = -9.0;
   }
   else {
-    diffuse = 0.0;
+    diffuse = abs(upperLeft-currentHeight)<0.01&&abs(upperRight-currentHeight)<0.01&&abs(right-currentHeight)<0.01&&abs(lowerRight-currentHeight)<0.01&&abs(lowerLeft-currentHeight)<0.01&&abs(left-currentHeight)<0.01?1000000.:0.;
     aoMask = 1.0;
   }
 
