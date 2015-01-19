@@ -4,10 +4,11 @@ projectHTML = ""
 projects = document.getElementById("projects")
 detail = document.getElementById("detail")
 pages = document.getElementById("pages")
-quotes = document.getElementById("quotes")
+#quotes = document.getElementById("quotes")
+$("#splash").fadeTo(200,1)
 mainScroll = 0
 
-quotes.data = require("quotes")
+#quotes.data = require("quotes")
 
 projects.data = projectList
 projectList.forEach((item)->
@@ -62,49 +63,10 @@ currentScroll = 0
 $(window).scroll(()->
   currentScroll = getScrollTop()
 )
-###
-scrollProjectPictures = () ->
-  console.log(pages.selected)
-  if pages.selected == 0
-    #Do your thing
-    pictures = $(detail).find(".images")
-    console.log pictures
-    clearTimeout(scrollProjectPicturesTimeout)
-    scrollProjectPicturesTimeout = setTimeout(scrollProjectPictures, 1000)
-
-inViewOnRight = (image, container) ->
-  containerLeft = $(container).scrollLeft()
-  containerWidth = $(container).width()
-  elemLeft = $(image).offset().left
-  elemWidth = $(image).width()
-  #0 if not in view, 1 if partially in view, 2 if fully in view
-  return containerLeft <= elemLeft
-###
 reloadProject()
 
-@clock = new THREE.Clock()
-clock.start()
-
-Audio = require("Audio")
-audio = new Audio()
-
-Backdrop = require("backdrop/Backdrop")
-backdrop = new Backdrop()
-
-resize = () ->
-  #$("#splash").css("height",window.innerHeight);
-  #Hefully I can use the backdrop container size instead
-  backdrop.width = window.innerWidth
-  backdrop.height = window.innerHeight
-  backdrop.resize()
-
-window.addEventListener("resize",resize)
-resize()
-
-window.freqStops = [0,0.02,0.5,0.7,1]
 #The normalized time
-time = 0
-
+currentScroll = 0
 scrollVelocity = 0
 maxScrollHeight = Infinity
 #Smooth scrolling
@@ -114,11 +76,11 @@ window.addEventListener("mousewheel",(event)->
   event.preventDefault()
 )
 
-renderloop = () ->
+update = () ->
   if window.requestAnimationFrame?
-    window.requestAnimationFrame(renderloop)
+    window.requestAnimationFrame(update)
   else
-    setTimeout(renderloop,1000/60)
+    setTimeout(update,1000/60)
 
   #Smooth scroll
   if scrollVelocity isnt 0
@@ -134,36 +96,4 @@ renderloop = () ->
       scrollVelocity = 0
     scrollVelocity *= 0.9
 
-  delta = Math.min(clock.getDelta(),0.1)
-
-  #Fade in logo if it's time
-  if (time<2) and (delta+time>=2)
-    $("#splash").fadeTo(1000,1)
-    quotes.run()
-
-  #Check the width and height sometimes to detect resize (a workaround)
-  if (time % 1) > (time + delta) % 1
-    if (backdrop.width isnt window.innerWidth)
-      resize()
-
-  #Update time
-  time += delta
-
-  #Analyze audio to get that backdrop dancing
-  audio.analyse()
-  for i in [0..backdrop.audioData.length-1]
-    backdrop.audioData[i] = 2*audio.getFrequency(freqStops[i], freqStops[i+1])/127
-
-  #Sync variables
-  backdrop.time = time
-  backdrop.currentScroll = currentScroll
-  if audio.avg == 0
-    backdrop.concavity = 0.99*backdrop.concavity+0.01
-  else
-    backdrop.concavity = 0.8*backdrop.concavity
-
-  backdrop.render()
-
-
-renderloop()
-resize()
+update()

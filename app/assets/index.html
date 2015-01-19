@@ -6,6 +6,7 @@
   <title>William Wu</title>
   <meta name="description" content="A curious student exploring the realm where imagination, visual design, and web technologies collide.">
   <meta name="author" content="William Wu">
+  <link rel="icon" href="Logo.png">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0" />
 
   <link rel="stylesheet" href="app.css" />
@@ -33,7 +34,6 @@
   <link rel="import" href="bower_components/core-animated-pages/core-animated-pages.html">
   <link rel="import" href="elements/project-list.html">
   <link rel="import" href="elements/detail-view.html">
-  <link rel="import" href="elements/quote-carousel.html">
 </head>
 
 <body>
@@ -41,19 +41,15 @@
   <section id="splash" style="height: 100%; opacity: 0;">
     <div style="height: 50%;">
     </div>
-    <img src="Logo.png" />
     <h1>William Wu</h1>
-    <audio controls src="Supernova.mp3" id="audio"></audio>
-    <quote-carousel id="quotes"></quote-carousel>
+    <div>Interactive Designer and Developer</div>
     <div id="comedown">
       <core-icon-button icon="expand-more"></core-icon-button>
     </div>
   </section>
   <span class="quickscroll"></span>
-  <core-animated-pages id="pages" selected="1" transitions="hero-transition cross-fade cross-fade-delayed">
-    <detail-view id="detail"></detail-view>
-    <project-list id="projects"></project-list>
-  </core-animated-pages>
+  <detail-view id="detail"></detail-view>
+  <project-list id="projects"></project-list>
   <script src="app.js"></script>
   <script>
     require('main');
