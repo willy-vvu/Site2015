@@ -1,5 +1,53 @@
 module.exports = [
   {
+    id: "singularity"
+    name: "Singularity"
+    date: "December 2014"
+    images: [
+      "project.png"
+      "Screenshot.png"
+      "Screenshot2.png"
+      "Screenshot3.png"
+      "Screenshot4.png"
+    ]
+    links: [
+      {
+        text: "Play in browser"
+        href: "http://appshowcase.mooo.com/projects/548/"
+      }
+      {
+        text: "View on Kapparate"
+        href: "https://www.ktbyte.com/contests/5k201412"
+      }
+    ]
+    tags: [
+      "KTByte"
+      "Processing"
+      "Hackathon"
+    ]
+  }
+  {
+    id: "visualizer"
+    name: "Visualizer"
+    date: "September 2014"
+    images: [
+      "Screenshot.png"
+      "Screenshot 2.png"
+      "Screenshot 3.png"
+      "Screenshot 4.png"
+    ]
+    links: [
+      {
+        text: "View in browser"
+        href: "http://willy-vvu.github.io/visualizer/"
+      }
+    ]
+    tags: [
+      "three.js"
+      "Music Visualization"
+    ]
+  }
+  {
     id: "gridflow"
     name: "Gridflow"
     date: "July 2014"
@@ -136,7 +184,7 @@ module.exports = [
     ]
     tags: [
       "Hackathon"
-      "Kapparate"
+      "KTByte"
     ]
   }
   {
