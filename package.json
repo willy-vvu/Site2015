@@ -18,6 +18,7 @@
     "css-brunch": ">= 1.0 < 1.8",
     "javascript-brunch": ">= 1.0 < 1.8",
     "markdown-brunch": "^1.7.2",
+    "stylus-brunch": "^1.8.1",
     "uglify-js-brunch": ">= 1.0 < 1.8"
   }
 }
