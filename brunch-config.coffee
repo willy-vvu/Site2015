@@ -7,5 +7,3 @@ exports.config =
       joinTo: 'app.css'
     templates:
       joinTo: 'app.js'
-  conventions:
-    assets: /assets[\\/]|content[\\/]/

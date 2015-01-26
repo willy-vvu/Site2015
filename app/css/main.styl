@@ -17,28 +17,27 @@ a
 .list.text li
   padding: 8px
 
+// Section and button coloring
+
 #splash
-  button.comedown
-    background-color: splashColor
+  .comedown
+    background-color: projectsColor
 
 #detail
   h1
     border-top: 5px solid detailColor
-  button.comedown
-    background-color: detailColor
+  .comedown
+    background-color: projectsColor
 
 #projects
   h1
     border-top: 5px solid projectsColor
-  padding-bottom: 72px;
-  button.comedown
-    background-color: projectsColor
+  .comedown
+    background-color: aboutColor
 
 #about
   h1
     border-top: 5px solid aboutColor
-  button.comedown
-    background-color: aboutColor
 
   .list
     li
@@ -47,20 +46,21 @@ a
     a:active li
       background-color: #eab505
 
-
-button.comedown
+.comedown
+  display: block
   padding: 0
   border: none
   background-color: inherit
-  font-size: 32px
   color: white
-  width: 64px
-  height: 64px
-  position: absolute
-  left: 50%
-  bottom: 32px
-  margin-left: -32px
 
+// Article and content stuff
+// Quotes
+#detail article
+  blockquote
+    :before
+      content: open-quote
+    :after
+      content: close-quote
 /*
 #8C00BF
 #5D007F
