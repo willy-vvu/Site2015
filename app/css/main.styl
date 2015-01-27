@@ -2,7 +2,12 @@ splashColor=#ff5e08
 aboutColor=#ffc608
 detailColor=#fc0a7a
 projectsColor=#8600b7
-aboutColor=#ffc608
+aboutColor=#ffa008
+@keyframes pulsate
+  from
+    background-color: detailColor
+  to
+    background-color: #ff5690
 
 a
   text-decoration: none
@@ -35,6 +40,20 @@ a
     border-top: 5px solid detailColor
   .date
     font-style: italic
+  .list
+    li
+      background-color: detailColor
+      color: white
+    a:first-child>li
+      -webkit-animation: pulsate 1s infinite alternate
+      -moz-animation: pulsate 1s infinite alternate
+      animation: pulsate 1s infinite alternate
+    a:active>li
+      background-color: #b10956
+      -webkit-animation: none
+      -moz-animation: none
+      animation: none
+
   article
     blockquote
       :before
@@ -43,6 +62,10 @@ a
         content: close-quote
     a
       color: detailColor
+  aside
+    img
+      width:100%
+      margin-bottom: 8px
   .comedown
     background-color: projectsColor
 

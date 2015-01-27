@@ -12,28 +12,46 @@ for project in projects
         </li>
     </a>
   ")
-$("#projectlist").append(projectElements)
+$("#projectlist").append(projectElements.add("<br>"))
+
+populateProject = ()->
+  $("#detail>.title").text(currentproject.name)
+  buttonElements = $()
+  for link in currentproject.links
+    buttonElements = $(buttonElements).add("
+      <a href=\"#{link.href}\"><li>#{link.text}</li></a>
+    ")
+  $("#detail>.list").empty().append(buttonElements.add("<br>"))
+  $("#detail>.date").text(currentproject.date)
+  $("#detail>.content").html(require("content/#{currentproject.id}"))
+  $("#detail>.images").empty()
+
+populateProjectImages = ()->
+  imageElements = $()
+  for image in currentproject.images[1..]
+    imageElements = $(imageElements).add("
+      <image src=\"#{currentproject.id}/#{image}\">
+    ")
+  $("#detail>.images").append(imageElements)
 
 updateProject = (immediate)->
   if currentproject
     if immediate
-      $("#detail>.title").text(currentproject.name)
-      $("#detail>.date").text(currentproject.date)
-      $("#detail>.content").html(require("content/#{currentproject.id}"))
+      populateProject()
+      populateProjectImages()
       $("#detail").show()
       $("html, body").animate({ scrollTop: $("#detail").offset().top}, 0)
       $(".comedown.projects").hide()
     else
-      $("html, body").animate({ scrollTop: $("#detail").offset().top}, 800)
+      $("html, body").animate({ scrollTop: $("#detail").offset().top}, 700)
       $("#projects").addClass("hidden")
       setTimeout ()->
-        $("#detail>.title").text(currentproject.name)
-        $("#detail>.date").text(currentproject.date)
-        $("#detail>.content").html(require("content/#{currentproject.id}"))
+        populateProject()
         $("#detail").removeClass("hidden")
         setTimeout ()->
+          populateProjectImages()
           window.location.hash = "#"+currentproject.id
-          $("#projects a, #projects, #projects h1, #detail .comedown").removeClass("hidden")
+          $("#projectlist a, #projects, #projects h1, #detail>.hideable").removeClass("hidden")
           $(".comedown.projects").addClass("hidden")
         , 400
       , 400
@@ -47,10 +65,10 @@ getProject = (id)->
 
 currentproject = getProject(location.hash[1..])
 
-$("#projects a").on "click", (event)->
+$("#projectlist a").on "click", (event)->
   event.preventDefault()
   currentproject = getProject($(this).attr("href")[1..])
-  $("#detail, #projects a, #projects h1, #detail .comedown").not(this).addClass("hidden")
+  $("#detail, #projectlist a, #projects h1, #detail>.hideable").not(this).addClass("hidden")
   setTimeout ()->
     updateProject()
   , 400

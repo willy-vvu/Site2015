@@ -12,7 +12,7 @@ module.exports = [
     ]
     links: [
       {
-        text: "Play in browser"
+        text: "Play in Browser"
         href: "http://appshowcase.mooo.com/projects/548/"
       }
       {
@@ -38,7 +38,7 @@ module.exports = [
     ]
     links: [
       {
-        text: "View in browser"
+        text: "View in Browser"
         href: "http://willy-vvu.github.io/visualizer/"
       }
     ]
@@ -60,7 +60,7 @@ module.exports = [
     ]
     links: [
       {
-        text: "View Demo"
+        text: "Play in Browser"
         href: "http://concord-consortium.github.io/gridflow"
       }
       {
@@ -68,7 +68,7 @@ module.exports = [
         href: "https://github.com/concord-consortium/gridflow"
       }
       {
-        text: "View on Concord Consortium"
+        text: "Visit the Concord Consortium"
         href: "http://concord.org"
       }
     ]
@@ -89,7 +89,7 @@ module.exports = [
     ]
     links: [
       {
-        text: "Play Now"
+        text: "Play in Browser"
         href: "http://willy-vvu.github.io/plasmid"
       }
       {
@@ -119,7 +119,7 @@ module.exports = [
     ]
     links: [
       {
-        text: "View Now"
+        text: "View in Browser"
         href: "http://willy-vvu.github.io/EnviroInvasiveSpecies"
       }
       {
@@ -199,7 +199,7 @@ module.exports = [
     ]
     links: [
       {
-        text: "View the Demo"
+        text: "View in Browser"
         href: "http://revealjs.herokuapp.com"
       }
       {

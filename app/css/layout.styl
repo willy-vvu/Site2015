@@ -37,3 +37,22 @@ section
   left: 50%
   bottom: 32px
   margin-left: -32px
+
+.list
+  br
+    display: none
+@media (min-width: 800px)
+  .list
+    >a
+      float: left
+      display: block
+      width: 50%
+      >li
+        margin-right: 4px
+    >a:nth-child(even)
+      >li
+        margin-right: 0
+        margin-left: 4px
+    br
+      display: initial
+      clear: both
