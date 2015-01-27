@@ -17,15 +17,32 @@ a
 .list.text li
   padding: 8px
 
-// Section and button coloring
+.hideable
+  display: block
+  transition: opacity 400ms
+
+.hidden
+  opacity: 0
 
 #splash
-  .comedown
+  .comedown.projects
     background-color: projectsColor
+  .comedown
+    background-color: detailColor
 
 #detail
   h1
     border-top: 5px solid detailColor
+  .date
+    font-style: italic
+  article
+    blockquote
+      :before
+        content: open-quote
+      :after
+        content: close-quote
+    a
+      color: detailColor
   .comedown
     background-color: projectsColor
 
@@ -53,18 +70,3 @@ a
   background-color: inherit
   color: white
 
-// Article and content stuff
-// Quotes
-#detail article
-  blockquote
-    :before
-      content: open-quote
-    :after
-      content: close-quote
-/*
-#8C00BF
-#5D007F
-#FF006A
-#FFC000
-#E5F100
-*/

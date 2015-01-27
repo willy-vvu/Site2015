@@ -33,23 +33,27 @@
 <body>
   <section id="splash">
     <h1>William W. Wu</h1>
-    <a class="comedown" href="#projects">
+    <a class="comedown smoothscroll" href="#detail">
+      <img src="Arrow.svg"/>
+    </a>
+    <a class="comedown smoothscroll projects hideable" href="#projects">
       <img src="Arrow.svg"/>
     </a>
   </section>
-  <section id="detail">
-    <h1 class="title">Detail view</h1>
+  <section id="detail" class="hideable" style="display: none">
+    <h1 class="title"></h1>
     <article class="content"></article>
+    <emphasis class="date"></emphasis>
     <div class="spacefill"></div>
-    <a class="comedown" href="#projects">
+    <a class="comedown smoothscroll hideable" href="#projects">
       <img src="Arrow.svg"/>
     </a>
   </section>
-  <section id="projects">
-    <h1>Projects</h1>
+  <section id="projects" class="hideable">
+    <h1 class="hideable">Projects</h1>
     <ul id="projectlist" class="list"></ul>
     <div class="spacefill"></div>
-    <a class="comedown" href="#about">
+    <a class="comedown smoothscroll" href="#about">
       <img src="Arrow.svg"/>
     </a>
   </section>
