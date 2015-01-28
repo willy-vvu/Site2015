@@ -13,17 +13,22 @@ a
   text-decoration: none
   color: inherit
 
-h1
-  margin-bottom: 1.5em
+quote:before, blockquote:before
+    content: open-quote
+quote:after, blockquote:after
+    content: close-quote
 
 .list
   list-style: none
   padding: 0
   li
+    margin-right: 8px
     margin-bottom: 8px
-
-.list.text li
-  padding: 8px
+.list.text
+  margin-bottom: 2em
+  li
+    padding: 12px
+    display: inline-block
 
 .hideable
   display: block
@@ -73,13 +78,7 @@ h1
       -webkit-animation: none
       -moz-animation: none
       animation: none
-
   article
-    blockquote
-      :before
-        content: open-quote
-      :after
-        content: close-quote
     a
       color: detailColor
   aside
@@ -92,20 +91,23 @@ h1
 #projects
   h1
     border-top: 5px solid projectsColor
-#projectlist
-  a:hover>li:before, a:active>li:before
-    background-color: transparent
-  li
-    position: relative
-  li:before
-    position: absolute
-    top: 0
-    bottom: 0
-    left: 0
-    right: 0
-    background-color: projectsColor
   .comedown
     background-color: aboutColor
+
+//#projectlist
+//  a:hover>li .thumbnail:before, a:active>li .thumbnail:before
+//    background-color: transparent
+//  li .thumbnail
+//    position: relative
+//  li .thumbnail:before
+//    content: ""
+//    display:block
+//    position: absolute
+//    top: 0
+//    bottom: 0
+//    left: 0
+//    right: 0
+//    background-color: rgba(projectsColor,0.5)
 
 #about
   h1
@@ -122,6 +124,20 @@ h1
   display: block
   padding: 0
   border: none
-  background-color: inherit
   color: white
 
+h1
+  margin-bottom: 1.5em
+
+@media (min-width: 800px)
+  h1
+    font-weight: 100
+    font-size: 2em
+  #projectlist a
+    width: 50%
+    display: inline-block
+  #projectlist li
+    margin-right: 4px
+  #projectlist a:nth-child(even) li
+    margin-right: 0
+    margin-left: 4px

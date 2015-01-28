@@ -12,7 +12,7 @@ for project in projects
         </li>
     </a>
   ")
-$("#projectlist").append(projectElements.add("<br>"))
+$("#projectlist").append(projectElements)
 
 populateProject = ()->
   $("#detail>.title").text(currentproject.name)
@@ -21,7 +21,7 @@ populateProject = ()->
     buttonElements = $(buttonElements).add("
       <a href=\"#{link.href}\"><li>#{link.text}</li></a>
     ")
-  $("#detail>.list").empty().append(buttonElements.add("<br>"))
+  $("#detail>.list").empty().append(buttonElements)
   $("#detail>.date").text(currentproject.date)
   $("#detail>.content").html(require("content/#{currentproject.id}"))
   $("#detail>.images").empty()
