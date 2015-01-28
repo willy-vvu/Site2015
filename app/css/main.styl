@@ -1,8 +1,8 @@
-splashColor=#ff5e08
+splashColor=#5082ef
 aboutColor=#ffc608
 detailColor=#fc0a7a
 projectsColor=#8600b7
-aboutColor=#ffa008
+aboutColor=#ffbd08
 @keyframes pulsate
   from
     background-color: detailColor
@@ -12,6 +12,9 @@ aboutColor=#ffa008
 a
   text-decoration: none
   color: inherit
+
+h1
+  margin-bottom: 1.5em
 
 .list
   list-style: none
@@ -30,6 +33,23 @@ a
   opacity: 0
 
 #splash
+  h1
+    font-weight: 100
+    line-height: 2em
+    .myname, .myself, .myprojects, .myproject
+      color: white
+      padding: 2px 12px
+      transition: width
+      cursor: pointer
+    .myname
+      background-color: splashColor
+    .myself
+      background-color: aboutColor
+    .myprojects
+      background-color: projectsColor
+    .myproject
+      background-color: detailColor
+
   .comedown.projects
     background-color: projectsColor
   .comedown
@@ -72,6 +92,18 @@ a
 #projects
   h1
     border-top: 5px solid projectsColor
+#projectlist
+  a:hover>li:before, a:active>li:before
+    background-color: transparent
+  li
+    position: relative
+  li:before
+    position: absolute
+    top: 0
+    bottom: 0
+    left: 0
+    right: 0
+    background-color: projectsColor
   .comedown
     background-color: aboutColor
 

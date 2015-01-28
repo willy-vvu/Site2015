@@ -39,20 +39,24 @@ updateProject = (immediate)->
     if immediate
       populateProject()
       populateProjectImages()
-      $("#detail").show()
-      $("html, body").animate({ scrollTop: $("#detail").offset().top}, 0)
+      $("#detail").removeClass("hidden").show()
+      $("html, body").animate({ scrollTop: $("#splash").height()}, 0)
       $(".comedown.projects").hide()
     else
-      $("html, body").animate({ scrollTop: $("#detail").offset().top}, 700)
+      $("html, body").animate({ scrollTop: $("#splash").height()}, 700)
+      # Fade that splash button color
+      projectsComedown = $(".comedown.projects")
+      if not projectsComedown.hasClass("hidden")
+        projectsComedown.addClass("hidden")
       $("#projects").addClass("hidden")
       setTimeout ()->
         populateProject()
-        $("#detail").removeClass("hidden")
+        projectsComedown.hide()
+        $("#detail").removeClass("hidden").slideDown(400)
         setTimeout ()->
           populateProjectImages()
           window.location.hash = "#"+currentproject.id
           $("#projectlist a, #projects, #projects h1, #detail>.hideable").removeClass("hidden")
-          $(".comedown.projects").addClass("hidden")
         , 400
       , 400
       # Update the arrows
@@ -82,3 +86,5 @@ $("a.smoothscroll").on "click", (event) ->
     location.hash = if href is "#detail" then "##{currentproject.id}" else href
   )
   event.preventDefault()
+
+require("splash")
