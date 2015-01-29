@@ -1,6 +1,7 @@
-A hackathon-winning project whose playful UI was written by me.
+The first place winner of the Lincoln Labs Online Education Hackathon.
+I wrote the playful UI for this project.
 
-Kitty Byte Challenge is a Java programming site where you try to solve problems faster than others.
+The Kitty Byte Challenge is a Java programming site where you try to solve problems faster than others.
 We want to make learning Java fun. Also, we want the Java learning experience to be accessible to
 students who only have web browsing devices (such as some tablets, phones, school computers). Although
 there are many online Javascript learning tools, Java is a different language from Javascript. Twenty

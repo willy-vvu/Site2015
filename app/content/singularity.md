@@ -1,6 +1,8 @@
 *The very core of a space simulator.*
 
-The first-place winner of the 2014 Fall Kapparate 5K competition.  
+Note: You'll need a keyboard and mouse for the best play experience.
+
+The first-place winner of the 2014 Fall Kapparate 5K competition.
 Getting over 16000 views in a month, Singularity itself was written over the course of a month.
 
 As quoted by Kapparate,

@@ -3,3 +3,5 @@ This is what I got when I combined webcam-based gesture recognition with Hakim E
 It took me a while to write and fine tune the detection algorithms. Even then, the algorithms are only about 80% accurate. You get the gist of it though:
 - A flick of the hand in mid-air changes the slide.
 - A two hand flick up or down activates the slide overview.
+
+The video on YouTube has over 70,000 views. I've already gotten quite a few requests from other developers who want to re-use the code.
