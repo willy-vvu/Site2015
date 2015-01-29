@@ -7,7 +7,7 @@ for project in projects
       <li>
           <div class=\"thumbnail\"
             style=\"background-image:
-              url('#{project.id}/#{project.images[0]}')\"></div>
+              url('content/#{project.id}/#{project.images[0]}')\"></div>
           <label>#{project.name}<label>
         </li>
     </a>
@@ -15,27 +15,27 @@ for project in projects
 $("#projectlist").append(projectElements)
 
 populateProject = ()->
-  $("#detail>.title").text(currentproject.name)
+  $("#detail>.title").text(currentProject.name)
   buttonElements = $()
-  for link in currentproject.links
+  for link in currentProject.links
     buttonElements = $(buttonElements).add("
       <a href=\"#{link.href}\"><li>#{link.text}</li></a>
     ")
   $("#detail>.list").empty().append(buttonElements)
-  $("#detail>.date").text(currentproject.date)
-  $("#detail>.content").html(require("content/#{currentproject.id}"))
+  $("#detail>.date").text(currentProject.date)
+  $("#detail>.content").html(require("content/#{currentProject.id}"))
   $("#detail>.images").empty()
 
 populateProjectImages = ()->
   imageElements = $()
-  for image in currentproject.images[1..]
+  for image in currentProject.images[1..]
     imageElements = $(imageElements).add("
-      <image src=\"#{currentproject.id}/#{image}\">
+      <image src=\"content/#{currentProject.id}/#{image}\">
     ")
   $("#detail>.images").append(imageElements)
 
 updateProject = (immediate)->
-  if currentproject
+  if currentProject
     if immediate
       populateProject()
       populateProjectImages()
@@ -55,7 +55,7 @@ updateProject = (immediate)->
         $("#detail").removeClass("hidden").slideDown(400)
         setTimeout ()->
           populateProjectImages()
-          window.location.hash = "#"+currentproject.id
+          location.hash = currenthash = "#"+currentProject.id
           $("#projectlist a, #projects, #projects h1, #detail>.hideable").removeClass("hidden")
         , 400
       , 400
@@ -67,11 +67,12 @@ getProject = (id)->
       return project
   return null
 
-currentproject = getProject(location.hash[1..])
+currentProject = getProject(location.hash[1..])
+currenthash = null
 
 $("#projectlist a").on "click", (event)->
   event.preventDefault()
-  currentproject = getProject($(this).attr("href")[1..])
+  currentProject = getProject($(this).attr("href")[1..])
   $("#detail, #projectlist a, #projects h1, #detail>.hideable").not(this).addClass("hidden")
   setTimeout ()->
     updateProject()
@@ -83,8 +84,26 @@ $("a.smoothscroll").on "click", (event) ->
   $("html, body").stop(true).animate({
     scrollTop: $(href).offset().top
   }, 1000, ()=>
-    location.hash = if href is "#detail" then "##{currentproject.id}" else href
+    location.hash = currenthash = if href is "#detail" then "##{currentProject.id}" else href
   )
   event.preventDefault()
+
+$(window).on "hashchange", (event) ->
+  if location.hash isnt currenthash
+    id = location.hash
+    project = getProject(id[1..])
+    if project?
+      currentProject = project
+      updateProject()
+    else if not id
+      $("html, body").stop(true).animate({
+        scrollTop: 0
+      })
+    else
+      $("html, body").stop(true).animate({
+        scrollTop: $(id).offset().top
+      })
+    currenthash = location.hash
+
 
 require("splash")
