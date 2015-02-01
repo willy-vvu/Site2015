@@ -29,10 +29,30 @@
 </head>
 
 <body>
+  <nav class="hideable">
+    <ul class="list" id="navlist">
+      <a href="#" class="smoothscroll"><li class="splash splash-color">William W. Wu</li></a>
+      <a href="#projects" class="smoothscroll"><li class="projects projects-color">Projects</li></a>
+      <a href="#about" class="smoothscroll"><li class="about about-color">About</li></a>
+    </ul>
+    <a href="#" id="navbutton"><svg width="49" height="49">
+      <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0,-1003.3622)">
+    <path
+       id="path2988"
+       style="fill:none;stroke:inherit;stroke-width:1.83710611;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 12.2496,1036.0292 24.501,0 m -24.501,-8.1671 24.501,0 m -24.501,-8.1671 24.501,0"
+       inkscape:connector-curvature="0" />
+  </g>
+    </svg></a>
+  </nav>
   <section id="splash">
-    <h1><span class="myname">William&nbsp;W.&nbsp;Wu</span> <span class="is">is&nbsp;a</span><br>
-    <span class="myself">developer</span> who <span class="myprojects">codes</span><br>
-    <span class="myproject">interactive experiences</span>
+    <h1><span class="myname splash-color">William&nbsp;W.&nbsp;Wu</span> <span class="is">is&nbsp;a</span><br>
+    <span class="myself about-color">developer</span> who <span class="myprojects projects-color">codes</span><br>
+    <span class="myproject detail-color">interactive experiences</span>
     </h1>
     <a class="comedown smoothscroll" href="#detail">
       <img src="Arrow.svg"/>
@@ -63,13 +83,14 @@
   </section>
   <section id="about">
     <h1>About Me</h1>
-    <p><quote id="quotes">A great question is one that everyone asks, but only a few dare to answer.</quote> -&nbsp;William&nbsp;W.&nbsp;Wu</p>
-    <div>You can view my...</div>
+    <p>You can find my...</p>
     <ul class="text list">
+      <a href="mailto:willy.vvu@gmail.com"><li>Email</li></a>
       <a href="http://www.linkedin.com/in/willyvvu"><li>LinkedIn</li></a>
       <a href="https://github.com/willy-vvu"><li>GitHub</li></a>
       <a href="Resume.pdf"><li>Résumé</li></a>
     </ul>
+    <p><quote id="quotes">A great question is one that everyone asks, but only a few dare to answer.</quote> -&nbsp;William&nbsp;W.&nbsp;Wu</p>
     <footer>All site design and code &copy;2015 William W. Wu</footer>
   </section>
   <script src="app.js"></script>
