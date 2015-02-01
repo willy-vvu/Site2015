@@ -1,152 +1,206 @@
-splashColor=#5082ef
-aboutColor=#ffc608
-detailColor=#fc0a7a
-projectsColor=#8600b7
-aboutColor=#ffbd08
+splashColor = #5082ef
+aboutColor = #ffc608
+detailColor = #fc0a7a
+projectsColor = #8600b7
+aboutColor = #ffbd08
+
+.splash-color
+  background-color splashColor
+.about-color
+  background-color aboutColor
+.projects-color
+  background-color projectsColor
+.detail-color
+  background-color detailColor
+
+.about-border
+  border-top-color aboutColor
+.projects-border
+  border-top-color projectsColor
+.detail-border
+  border-top-color detailColor
+nav.fading-border
+  transition: opacity 400ms, border-top-color 400ms
+
 @keyframes pulsate
   from
-    background-color: detailColor
+    background-color detailColor
   to
-    background-color: #ff5690
+    background-color #ff5690
 
 a
-  text-decoration: none
-  color: inherit
+  text-decoration none
+  color inherit
 
-quote:before, blockquote:before
-    content: open-quote
-quote:after, blockquote:after
-    content: close-quote
+h1
+  margin-top: 0
+
+quotebefore, blockquotebefore
+    content open-quote
+quoteafter, blockquoteafter
+    content close-quote
 
 .list
-  list-style: none
-  padding: 0
+  list-style none
+  padding 0
   li
-    margin-right: 8px
-    margin-bottom: 8px
+    margin-right 8px
+    margin-bottom 8px
 .list.text
-  margin-bottom: 2em
+  margin-bottom 2em
   li
-    padding: 12px
-    display: inline-block
+    padding 12px
+    display inline-block
 
 .hideable
-  display: block
-  transition: opacity 400ms
+  display block
+  transition opacity 400ms
 
 .hidden
-  opacity: 0
+  opacity 0
 
 #splash
   h1
-    font-weight: 100
-    line-height: 2em
+    font-weight 100
+    line-height 2em
     .myname, .myself, .myprojects, .myproject
-      color: white
-      padding: 2px 12px
-      transition: width
-      cursor: pointer
-    .myname
-      background-color: splashColor
-    .myself
-      background-color: aboutColor
-    .myprojects
-      background-color: projectsColor
-    .myproject
-      background-color: detailColor
+      color white
+      padding 2px 12px
+      transition width
+      cursor pointer
 
   .comedown.projects
-    background-color: projectsColor
+    background-color projectsColor
   .comedown
-    background-color: detailColor
+    background-color detailColor
 
 #detail
   h1
-    border-top: 5px solid detailColor
+    border-top 5px solid detailColor
   .date
-    font-style: italic
+    font-style italic
   .list
     li
-      background-color: detailColor
-      color: white
+      background-color detailColor
+      color white
     a:first-child>li
-      -webkit-animation: pulsate 1s infinite alternate
-      -moz-animation: pulsate 1s infinite alternate
-      animation: pulsate 1s infinite alternate
+      -webkit-animation pulsate 1s infinite alternate
+      -moz-animation pulsate 1s infinite alternate
+      animation pulsate 1s infinite alternate
     a:active>li
-      background-color: #b10956
-      -webkit-animation: none
-      -moz-animation: none
-      animation: none
+      background-color #b10956
+      -webkit-animation none
+      -moz-animation none
+      animation none
   article
     a
-      color: detailColor
+      color detailColor
   aside
     img
-      width:100%
-      margin-bottom: 8px
+      width 100%
+      margin-bottom 8px
   .comedown
-    background-color: projectsColor
+    background-color projectsColor
 
 #projects
   h1
-    border-top: 5px solid projectsColor
+    border-top 5px solid projectsColor
   .comedown
-    background-color: aboutColor
+    background-color aboutColor
 
 //#projectlist
-//  a:hover>li .thumbnail:before, a:active>li .thumbnail:before
-//    background-color: transparent
+//  ahover>li .thumbnailbefore, a:active>li .thumbnailbefore
+//    background-color transparent
 //  li .thumbnail
-//    position: relative
-//  li .thumbnail:before
-//    content: ""
-//    display:block
-//    position: absolute
-//    top: 0
-//    bottom: 0
-//    left: 0
-//    right: 0
-//    background-color: rgba(projectsColor,0.5)
+//    position relative
+//  li .thumbnailbefore
+//    content ""
+//    displayblock
+//    position absolute
+//    top 0
+//    bottom 0
+//    left 0
+//    right 0
+//    background-color rgba(projectsColor,0.5)
 
 #about
-  position: relative
+  position relative
   h1
-    border-top: 5px solid aboutColor
+    border-top 5px solid aboutColor
 
   .list
     li
-      background-color: aboutColor
-      color: white
+      background-color aboutColor
+      color white
     a:active li
-      background-color: #eab505
+      background-color #eab505
 
   footer
-    left: 0
-    right: 0
-    color: #aaa
-    text-align: center
-    position: absolute
-    bottom: 24px
+    left 0
+    right 0
+    color #aaa
+    text-align center
+    position absolute
+    bottom 24px
 
 .comedown
-  display: block
-  padding: 0
-  border: none
-  color: white
+  display block
+  padding 0
+  border none
+  color white
 
-h1
-  margin-bottom: 1.5em
 
-@media (min-width: 800px)
+// Spacing and nav
+nav
+  position fixed
+  // Over 9000
+  z-index 9001
+  display block
+  margin-left auto
+  margin-right auto
+  width 90%
+  max-width 800px
+  top 0
+  left 0
+  right 0
+  border-top 5px solid transparent
+  #navbutton
+    position absolute
+    top 0
+    right 0
+    opacity 1
+    stroke black
+    transition stroke 400ms
+  #navbutton.active
+    stroke white
+  #navbutton:hover
+    opacity 0.5
+  #navbutton:active
+    opacity 1
+  #navlist
+    margin 0
+    display none
+    li
+      color white
+      margin 0
+      padding 12px
+
+
+@media (min-width 800px)
   h1
-    font-weight: 100
-    font-size: 2em
+    font-weight 100
+    font-size 2em
   #projectlist a
-    width: 50%
-    display: inline-block
+    width 50%
+    display inline-block
   #projectlist li
-    margin-right: 4px
+    margin-right 4px
   #projectlist a:nth-child(even) li
-    margin-right: 0
-    margin-left: 4px
+    margin-right 0
+    margin-left 4px
+  nav
+    ul.list
+      a
+        display block
+        float left
+        width 33.333%

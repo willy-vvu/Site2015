@@ -14,6 +14,7 @@ for project in projects
   ")
 $("#projectlist").append(projectElements)
 
+# Fills the project element with the current project data.
 populateProject = ()->
   $("#detail>.title").text(currentProject.name)
   buttonElements = $()
@@ -26,6 +27,10 @@ populateProject = ()->
   $("#detail>.content").html(require("content/#{currentProject.id}"))
   $("#detail>.images").empty()
 
+
+# Fills the project element with images.
+# This is meant to be called in a deferred manner.
+
 populateProjectImages = ()->
   imageElements = $()
   for image in currentProject.images[1..]
@@ -33,6 +38,7 @@ populateProjectImages = ()->
       <image src=\"content/#{currentProject.id}/#{image}\">
     ")
   $("#detail>.images").append(imageElements)
+
 
 updateProject = (immediate)->
   if currentProject
@@ -56,7 +62,8 @@ updateProject = (immediate)->
         setTimeout ()->
           populateProjectImages()
           location.hash = currenthash = "#"+currentProject.id
-          $("#projectlist a, #projects, #projects h1, #detail>.hideable").removeClass("hidden")
+          $("#projectlist a, #projects, #projects h1, #detail>.hideable, nav").removeClass("hidden")
+          navBarVisible = true
         , 400
       , 400
       # Update the arrows
@@ -73,37 +80,102 @@ currenthash = null
 $("#projectlist a").on "click", (event)->
   event.preventDefault()
   currentProject = getProject($(this).attr("href")[1..])
-  $("#detail, #projectlist a, #projects h1, #detail>.hideable").not(this).addClass("hidden")
+  $("#detail, #projectlist a, #projects h1, #detail>.hideable, nav").not(this).addClass("hidden")
+  navBarVisible = false
   setTimeout ()->
     updateProject()
   , 400
 updateProject(true)
 
-$("a.smoothscroll").on "click", (event) ->
+validHashes = ["#about", "#projects", "#detail"]
+
+$("a.smoothscroll").on "click", (event)->
   href = $(this).attr("href")
-  $("html, body").stop(true).animate({
-    scrollTop: $(href).offset().top
-  }, 1000, ()=>
-    location.hash = currenthash = if href is "#detail" then "##{currentProject.id}" else href
-  )
+  if not (href in validHashes)
+    $("html, body").stop(true).animate({
+      scrollTop: 0
+    }, 1000, ()->
+      location.hash = currenthash = "#"
+    )
+  else
+    $("html, body").stop(true).animate({
+      scrollTop: $(href).offset().top
+    }, 1000, ()->
+      location.hash = currenthash = if href is "#detail" then "##{currentProject.id}" else href
+    )
   event.preventDefault()
 
-$(window).on "hashchange", (event) ->
+$(window).on "hashchange", (event)->
   if location.hash isnt currenthash
     id = location.hash
     project = getProject(id[1..])
     if project?
       currentProject = project
       updateProject()
-    else if not id
+    else if not (id in validHashes)
       $("html, body").stop(true).animate({
         scrollTop: 0
-      })
+      }, 1000)
     else
       $("html, body").stop(true).animate({
         scrollTop: $(id).offset().top
-      })
+      }, 1000)
     currenthash = location.hash
 
+scrollStops = [
+  0, 0, 0
+]
+recomputeScrollStops = ()->
+  scrollStops[1] = $("#projects").offset().top
+  scrollStops[0] = if currentProject then $("#detail").offset().top else scrollStops[1]
+  scrollStops[2] = $("#about").offset().top
+recomputeScrollStops()
+currentScrollStop = 0
+navBarVisible = true
+updateNavBar = ()->
+  scrollTop = Math.max($("html").scrollTop(), $("body").scrollTop())
+  scrollStop = scrollStops.length
+  for i in [0...scrollStops.length]
+    if scrollStops[i]>scrollTop
+      if scrollStops[i] - scrollTop < 128
+        scrollStop = -i
+      else
+        scrollStop = i
+      break
+  if scrollStop isnt currentScrollStop
+    $("nav").attr("class",
+      "hideable"+(switch scrollStop
+        when 1 then " detail-border"
+        when 2 then " projects-border"
+        when 3 then " about-border"
+        else "")+
+      if Math.abs(scrollStop) is Math.abs(currentScrollStop) then " fading-border"
+      else ""
+    )
+    currentScrollStop = scrollStop
+$(window).on "resize", recomputeScrollStops
+
+$(window).on "scroll", (event)->
+  if navBarVisible
+    recomputeScrollStops()
+    updateNavBar()
+
+activateNav = ()->
+  $("#navbutton").addClass("active")
+  $("#navlist").stop(true).slideDown(400)
+
+deactivateNav = ()->
+  $("#navbutton").removeClass("active")
+  $("#navlist").stop(true).slideUp(400)
+
+$("#navbutton").on "click", (event)->
+  if not $("#navbutton").hasClass("active")
+    activateNav()
+  else
+    deactivateNav()
+  event.preventDefault()
+
+$("#navlist a").on "click", ()->
+  setTimeout deactivateNav, 400
 
 require("splash")
