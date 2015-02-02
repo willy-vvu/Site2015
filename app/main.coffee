@@ -160,13 +160,33 @@ $(window).on "scroll", (event)->
     recomputeScrollStops()
     updateNavBar()
 
+navTimeout = -1
 activateNav = ()->
+  clearTimeout(navTimeout)
   $("#navbutton").addClass("active")
-  $("#navlist").stop(true).slideDown(400)
+  $("#navlist").show()
+  navlis = $("#navlist li")
+  navTimeout = setTimeout ()->
+    clearTimeout(navTimeout)
+    navlis.eq(0).removeClass("transformed")
+    navTimeout = setTimeout ()->
+      clearTimeout(navTimeout)
+      navlis.eq(1).removeClass("transformed")
+      navTimeout = setTimeout ()->
+        clearTimeout(navTimeout)
+        navlis.eq(2).removeClass("transformed")
+      , 100
+    , 100
+  , 0
 
 deactivateNav = ()->
   $("#navbutton").removeClass("active")
-  $("#navlist").stop(true).slideUp(400)
+  $("#navlist li").addClass("transformed")
+  clearTimeout(navTimeout)
+  navTimeout = setTimeout ()->
+    $("#navlist").hide()
+  , 400
+
 
 $("#navbutton").on "click", (event)->
   if not $("#navbutton").hasClass("active")
@@ -176,6 +196,7 @@ $("#navbutton").on "click", (event)->
   event.preventDefault()
 
 $("#navlist a").on "click", ()->
-  setTimeout deactivateNav, 400
-
+  clearTimeout(navTimeout)
+  $("#navlist a").not(this).find("li").addClass("transformed")
+  navTimeout = setTimeout deactivateNav, 400
 require("splash")

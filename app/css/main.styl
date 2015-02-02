@@ -181,9 +181,13 @@ nav
     margin 0
     display none
     li
+      transition transform 400ms
+      transform-origin 50% 0
       color white
       margin 0
       padding 12px
+    li.transformed
+      transform rotateX(90deg)
 
 
 @media (min-width 800px)
