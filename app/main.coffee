@@ -20,11 +20,11 @@ populateProject = ()->
   buttonElements = $()
   for link in currentProject.links
     buttonElements = $(buttonElements).add("
-      <a href=\"#{link.href}\"><li>#{link.text}</li></a>
+      <a href=\"#{link.href}\" target=\"_blank\"><li>#{link.text}</li></a>
     ")
   $("#detail>.list").empty().append(buttonElements)
   $("#detail>.date").text(currentProject.date)
-  $("#detail>.content").html(require("content/#{currentProject.id}"))
+  $("#detail>.content").html(require("content/#{currentProject.id}").replace("<a ", "<a target=\"_blank\" "))
   $("#detail>.images").empty()
 
 
@@ -39,6 +39,7 @@ populateProjectImages = ()->
     ")
   $("#detail>.images").append(imageElements)
 
+currenthash = null
 
 updateProject = (immediate)->
   if currentProject
@@ -75,7 +76,6 @@ getProject = (id)->
   return null
 
 currentProject = getProject(location.hash[1..])
-currenthash = null
 
 $("#projectlist a").on "click", (event)->
   event.preventDefault()
@@ -165,23 +165,23 @@ activateNav = ()->
   clearTimeout(navTimeout)
   $("#navbutton").addClass("active")
   $("#navlist").show()
-  navlis = $("#navlist li")
+  navas = $("#navlist a")
   navTimeout = setTimeout ()->
     clearTimeout(navTimeout)
-    navlis.eq(0).removeClass("transformed")
+    navas.eq(0).removeClass("transformed")
     navTimeout = setTimeout ()->
       clearTimeout(navTimeout)
-      navlis.eq(1).removeClass("transformed")
+      navas.eq(1).removeClass("transformed")
       navTimeout = setTimeout ()->
         clearTimeout(navTimeout)
-        navlis.eq(2).removeClass("transformed")
+        navas.eq(2).removeClass("transformed")
       , 100
     , 100
   , 0
 
 deactivateNav = ()->
   $("#navbutton").removeClass("active")
-  $("#navlist li").addClass("transformed")
+  $("#navlist a").addClass("transformed")
   clearTimeout(navTimeout)
   navTimeout = setTimeout ()->
     $("#navlist").hide()
@@ -197,6 +197,6 @@ $("#navbutton").on "click", (event)->
 
 $("#navlist a").on "click", ()->
   clearTimeout(navTimeout)
-  $("#navlist a").not(this).find("li").addClass("transformed")
-  navTimeout = setTimeout deactivateNav, 400
+  $("#navlist a").not(this).addClass("transformed")
+  navTimeout = setTimeout deactivateNav, 800
 require("splash")

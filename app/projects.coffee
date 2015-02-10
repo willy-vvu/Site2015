@@ -1,5 +1,36 @@
 module.exports = [
   {
+    id: "motemote"
+    name: "Motemote"
+    date: "February 2015"
+    images: [
+      "Screenshot (3).png"
+      "Screenshot (1).png"
+      "Screenshot (2).png"
+      "Screenshot (4).png"
+    ]
+    links: [
+      {
+        text: "View on ChallengePost"
+        href: "http://challengepost.com/software/motemote"
+      }
+      {
+        text: "View on GitHub"
+        href: "https://github.com/willy-vvu/motemote"
+      }
+      {
+        text: "View Hackathon"
+        href: "http://hackatbrown2015.challengepost.com/submissions"
+      }
+    ]
+    tags: [
+      "Hack@Brown"
+      "Mobile"
+      "Socket.io"
+      "Hackathon"
+    ]
+  }
+  {
     id: "singularity"
     name: "Singularity"
     date: "December 2014"

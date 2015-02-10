@@ -180,14 +180,17 @@ nav
   #navlist
     margin 0
     display none
+    a
+      transition height 400ms
+      height 49px
+      display block
+      overflow hidden
+    a.transformed
+      height 0px
     li
-      transition transform 400ms
-      transform-origin 50% 0
       color white
       margin 0
       padding 12px
-    li.transformed
-      transform rotateX(90deg)
 
 
 @media (min-width 800px)
@@ -208,3 +211,5 @@ nav
         display block
         float left
         width 33.333%
+        // The border is a hack to prevent the a from shrinking and disappearing from layout
+        border-bottom 1px solid transparent
