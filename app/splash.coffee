@@ -71,7 +71,7 @@ replaceText = (element, text, deletingNeeded, callback)->
 
 setTimeout ()->
   randomUpdateElement()
-, 3000
+, 3100 + 2500
 
 $(".myself, .myprojects, .myproject").on "click", ()->
   for elementclass in allClasses
@@ -95,4 +95,38 @@ randomUpdateQuote = ()->
 
 setTimeout ()->
   randomUpdateQuote()
-, 8000
+, 3100 + 8000
+
+
+# Animate that logo
+setTimeout ()->
+  $("#logo .splash-color").addClass("expanded")
+, 500
+setTimeout ()->
+  $("#logo .detail-color").addClass("expanded")
+, 500 + 200
+setTimeout ()->
+  $("#logo .projects-color").addClass("expanded")
+, 500 + 400
+setTimeout ()->
+  $("#logo .about-color").addClass("expanded")
+, 500 + 600
+setTimeout ()->
+  $("#logo .splash-color").removeClass("expanded")
+, 2000
+setTimeout ()->
+  $("#logo .detail-color").removeClass("expanded")
+, 2000 + 200
+setTimeout ()->
+  $("#logo .projects-color").removeClass("expanded")
+, 2000 + 400
+setTimeout ()->
+  $("#logo .about-color").removeClass("expanded")
+, 2000 + 600
+setTimeout ()->
+  $("#splash>h1.hidden").removeClass("hidden")
+  $("#logo").hide()
+, 3100
+setTimeout ()->
+  $("#splash>div.hidden").removeClass("hidden")
+, 3100 + 400

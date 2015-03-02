@@ -2,7 +2,6 @@ splashColor = #5082ef
 aboutColor = #ffc608
 detailColor = #fc0a7a
 projectsColor = #8600b7
-aboutColor = #ffbd08
 
 .splash-color
   background-color splashColor
@@ -60,6 +59,34 @@ quoteafter, blockquoteafter
   opacity 0
 
 #splash
+  #logo
+    position absolute
+    top 50%
+    left 50%
+    width 256px
+    height 256px
+    margin-left -128px
+    margin-top -128px
+    z-index 10000
+    div
+      position absolute
+      height 0%
+      transition height 400ms
+    div.expanded
+      height 100%
+    .splash-color
+      width 21.4%
+      left 0
+    .detail-color
+      width 21.4%
+      left 26.2%
+    .projects-color
+      width 21.4%
+      left 52.4%
+    .about-color
+      width 21.4%
+      left 78.6%
+
   h1
     font-weight 100
     line-height 2em
