@@ -29,7 +29,7 @@
 </head>
 
 <body>
-  <nav class="">
+  <nav>
     <ul class="list" id="navlist">
       <a href="#" class="smoothscroll transformed"><li class="splash splash-color">Home</li></a>
       <a href="#projects" class="smoothscroll transformed"><li class="projects projects-color">Projects</li></a>
@@ -43,26 +43,34 @@
     </svg></a>
   </nav>
   <section id="splash">
-    <h1><span class="myname splash-color">William&nbsp;W.&nbsp;Wu</span> <span class="is">is&nbsp;a</span><br>
+    <div id="logo">
+      <div class="splash-color"></div>
+      <div class="detail-color"></div>
+      <div class="projects-color"></div>
+      <div class="about-color"></div>
+    </div>
+    <h1 class="hideable hidden"><span class="myname splash-color">William&nbsp;W.&nbsp;Wu</span> <span class="is">is&nbsp;a</span><br>
     <span class="myself about-color">developer</span> who <span class="myprojects projects-color">codes</span><br>
     <span class="myproject detail-color">interactive experiences</span>
     </h1>
-    <a class="comedown smoothscroll" href="#detail">
-      <svg>
-        <path
-         style="fill:none;stroke:#ffffff;stroke-width:2;stroke-linecap:square;stroke-linejoin:miter"
-         d="m 21,27 c 0,0 11,11 11,11 l 11,-11"
-         id="path2987"/>
-      </svg>
-    </a>
-    <a class="comedown smoothscroll projects hideable" href="#projects">
-      <svg>
-        <path
-         style="fill:none;stroke:#ffffff;stroke-width:2;stroke-linecap:square;stroke-linejoin:miter"
-         d="m 21,27 c 0,0 11,11 11,11 l 11,-11"
-         id="path2987"/>
-      </svg>
-    </a>
+    <div class="hideable hidden">
+      <a class="comedown smoothscroll" href="#detail">
+        <svg>
+          <path
+           style="fill:none;stroke:#ffffff;stroke-width:2;stroke-linecap:square;stroke-linejoin:miter"
+           d="m 21,27 c 0,0 11,11 11,11 l 11,-11"
+           id="path2987"/>
+        </svg>
+      </a>
+      <a class="comedown smoothscroll projects hideable" href="#projects">
+        <svg>
+          <path
+           style="fill:none;stroke:#ffffff;stroke-width:2;stroke-linecap:square;stroke-linejoin:miter"
+           d="m 21,27 c 0,0 11,11 11,11 l 11,-11"
+           id="path2987"/>
+        </svg>
+      </a>
+    </div>
   </section>
   <section id="detail" class="hideable" style="display: none">
     <h1 class="title"></h1>
