@@ -1,5 +1,37 @@
 module.exports = [
   {
+    id: "voidgunner"
+    name: "Void Gunner"
+    date: "February 2015"
+    images: [
+      "Screenshot 3.png"
+      "Screenshot.png"
+      "Screenshot 2.png"
+      "Screenshot 4.png"
+      "Screenshot 5.png"
+    ]
+    links: [
+      {
+        text: "View on Youtube"
+        href: "http://youtu.be/rPSjOjC7FZE?t=49m45s"
+      }
+      {
+        text: "View on GitHub"
+        href: "https://github.com/willy-vvu/VoidGunner"
+      }
+      {
+        text: "View Hackathon"
+        href: "http://blueprint.hackmit.org/"
+      }
+    ]
+    tags: [
+      "MIT Blueprint"
+      "Mobile"
+      "Socket.io"
+      "Hackathon"
+    ]
+  }
+  {
     id: "motemote"
     name: "Motemote"
     date: "February 2015"
