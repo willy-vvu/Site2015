@@ -1,0 +1,3 @@
+A Smash-Bros-like game with homemade characters, stages, and mechanics!
+
+While working on this project, I was able to hone my CoffeeScript skills, as well as code organization. SmashLab is one of my largets projects so far, with more than 50 code classes and 2.5 thousand lines of code! Along the way, I picked up the tip of keeping code DRY, an acronym for "Don't Repeat Yourself". It's been a wonderful experience that has yielded a suprisingly fun product!

@@ -1,5 +1,30 @@
 module.exports = [
   {
+    id: "smashlab"
+    name: "SmashLab"
+    date: "December 2014 - April 2015"
+    images: [
+      "Screenshot.png"
+    ]
+    links: [
+      {
+        text: "Play in Browser"
+        href: "https://idea-lab.github.io/SmashLab"
+      }
+      {
+        text: "View on GitHub"
+        href: "https://github.com/idea-lab/smashlab"
+      }
+      {
+        text: "View on IdeaLab Forums"
+        href: "ab-idealab.boards.net/board/9/smashlab"
+      }
+    ]
+    tags: [
+      "IdeaLab"
+    ]
+  }
+  {
     id: "voidgunner"
     name: "Void Gunner"
     date: "February 2015"
@@ -25,6 +50,7 @@ module.exports = [
       }
     ]
     tags: [
+      "IdeaLab"
       "MIT Blueprint"
       "Mobile"
       "Socket.io"
