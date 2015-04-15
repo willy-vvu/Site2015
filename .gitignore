@@ -33,3 +33,6 @@ bower_components/
 
 # That pesky c9 stuff.
 .c9
+
+*.sublime-project
+*.sublime-workspace
